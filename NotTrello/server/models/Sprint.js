@@ -6,7 +6,7 @@ export const SprintSchema = new Schema(
     name: { type: String, required: true },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
-    projectId: { type: Schema.Types.ObjectId, ref: 'Project', required: true },
+    projectId: { type: mongoose.Schema.Types.ObjectId, ref: 'Project', required: true },
     creatorId: { type: Schema.Types.ObjectId, ref: 'Account', required: true },
     isOpen: { type: Boolean }
   }
