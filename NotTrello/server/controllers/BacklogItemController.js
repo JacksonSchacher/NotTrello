@@ -7,6 +7,7 @@ export class BacklogItemController extends BaseController{
     super('api/projects/:projectId/backlog')
     this.router
     .get('', this.getBacklogItems)
+    .get('/:backlogItemId', this.getBacklogItemById)
     .use(Auth0Provider.getAuthorizedUserInfo)
     .post('', this.createBacklogItem)
     .put('/:backlogItemId', this.editBacklogItem)
@@ -14,14 +15,25 @@ export class BacklogItemController extends BaseController{
   }
 async getBacklogItems(req, res, next) {
     try {
-      await backlogItemsService.getBacklogItems()
+      const backlogItem = await backlogItemsService.getBacklogItems(req.query)
+      res.send(backlogItem)
     } catch (error) {
       next(error)
     }
       }
+      async getBacklogItemById(req, res, next){
+        try {
+          const backlogItem = await backlogItemsService.getBacklogItemsById(req.params.backlogItemId)
+          res.send(backlogItem)
+        } catch (error) {
+          next(error)
+        }
+      }
 async createBacklogItem(req, res, next) {
 try {
-  await backlogItemsService.createBacklogItem()
+  req.body.creatorId = req.userInfo.id
+  const backlogItem = await backlogItemsService.createBacklogItem(req.body)
+  res.send(backlogItem)
 } catch (error) {
   next(error)
 }

@@ -55,6 +55,7 @@ export class ProjectController extends BaseController {
     try {
       await projectService.deleteProject()
     } catch (error) {
+      next(error)
     }
   }
 }
