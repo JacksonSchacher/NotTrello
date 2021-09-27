@@ -13,6 +13,12 @@ export const ProjectSchema = new Schema(
 ProjectSchema.virtual('creator', {
   localField: 'creatorId',
   foreignField: '_id',
-  justOne: true,
-  ref: 'Account'
+  ref: 'Account',
+  justOne: true
 })
+ProjectSchema.virtual('project'), {
+  localField: 'projectId',
+  foreignField: '_id',
+  ref: 'Project',
+  justOne: true
+}
