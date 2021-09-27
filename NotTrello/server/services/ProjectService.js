@@ -1,5 +1,5 @@
 import { dbContext } from '../db/DbContext'
-import { BadRequest } from '../utils/Errors'
+import { BadRequest, Forbidden } from '../utils/Errors'
 class ProjectService {
   async getProjects(query) {
     const projects = await dbContext.Project.find(query).populate('creator', 'name picture')
@@ -10,20 +10,36 @@ class ProjectService {
   }
 
   async createProject(body) {
-    const project = a
-    throw new Error('Method not implemented.')
+    const project = await dbContext.Project.create(body)
+    return project
   }
 
   async deleteProject(projectId, id) {
-    throw new Error('Method not implemented.')
+    const project = await this.getProjectById(projectId)
+    if (id !== project.creatorId.toString()) {
+      throw new Forbidden('Not Authorized to Delete')
+    }
+    await project.remove()
+    return project
   }
 
   async editProject(projectId, id, body) {
-    throw new Error('Method not implemented.')
+    const project = await this.getProjectById(projectId)
+    if (id !== project.creatorId.toString()) {
+      throw new Forbidden('Not Authorized to Edit')
+    }
+    project.name = body.name || project.name
+    project.description = body.description || project.description
+    await project.save()
+    return project
   }
 
   async getProjectById(projectId) {
-    throw new Error('Method not implemented.')
+    const project = await dbContext.Project.findById(projectId).populate('creator', 'name picture')
+    if (!project) {
+      throw new BadRequest('Invalid Project Id')
+    }
+    return project
   }
 }
 export const projectService = new ProjectService()

@@ -13,6 +13,16 @@ export class ProjectController extends BaseController {
       .delete('/:projectId', this.deleteProject)
       .put('/:projectId', this.editProject)
   }
+
+  async editProject(req, res, next) {
+    try {
+      const project = await projectService.editProject(req.params.projectId, req.userInfo.id, req.body)
+      res.send(project)
+    } catch (error) {
+      next(error)
+    }
+  }
+
   async createProject(req, res, next) {
     try {
       req.body.creatorId = req.userInfo.id
@@ -40,10 +50,11 @@ export class ProjectController extends BaseController {
       next(error)
     }
   }
-async deleteProject(req, res, next) {
-  try {
-    await projectService.deleteProject()
-  } catch (error) {
+
+  async deleteProject(req, res, next) {
+    try {
+      await projectService.deleteProject()
+    } catch (error) {
+    }
   }
-}
 }
