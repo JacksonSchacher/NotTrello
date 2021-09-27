@@ -1,14 +1,29 @@
 import { dbContext } from '../db/DbContext'
+import { BadRequest } from '../utils/Errors'
 class ProjectService {
-  deleteProject() {
-    throw new Error("Method not implemented.")
-  }
-  createProject() {
-    throw new Error("Method not implemented.")
-  }
-  getProjects() {
-    throw new Error("Method not implemented.")
+  async getProjects(query) {
+    const projects = await dbContext.Project.find(query).populate('creator', 'name picture')
+    if (!projects) {
+      throw new BadRequest('No Projects Found')
+    }
+    return projects
   }
 
+  async createProject(body) {
+    const project = a
+    throw new Error('Method not implemented.')
+  }
+
+  async deleteProject(projectId, id) {
+    throw new Error('Method not implemented.')
+  }
+
+  async editProject(projectId, id, body) {
+    throw new Error('Method not implemented.')
+  }
+
+  async getProjectById(projectId) {
+    throw new Error('Method not implemented.')
+  }
 }
 export const projectService = new ProjectService()
