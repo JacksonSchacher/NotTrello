@@ -1,26 +1,29 @@
-import { dbContext } from "../db/DbContext"
-import { BadRequest, Forbidden } from "../utils/Errors"
+import { dbContext } from '../db/DbContext'
+import { BadRequest, Forbidden } from '../utils/Errors'
 
-class BacklogItemsService{
+class BacklogItemsService {
   async getBacklogItems(query) {
     const backlogItem = await dbContext.BacklogItem.find(query).populate('creator', 'name picture')
     return backlogItem
+  }
+
+  async getBacklogItemsById(backlogItemId) {
+    const backlogItem = await dbContext.BacklogItem.findById(backlogItemId).populate('creator', 'name picture')
+    if (!backlogItem) {
+      throw new BadRequest('Invalid BacklogItem Id')
     }
-    async getBacklogItemsById(backlogItemId){
-      const backlogItem = await dbContext.BacklogItem.findById(backlogItemId).populate('creator', 'name picture')
-      if(!backlogItem){
-        throw new BadRequest('Invalid BacklogItem Id')
-      }
-      return backlogItem
-    }
+    return backlogItem
+  }
+
   async createBacklogItem(itemData) {
     const backlogItem = await dbContext.BacklogItem.create(itemData)
     return backlogItem
   }
+
   async deleteBacklogItem(backlogItemId, userId) {
     const backlogItem = await this.getBacklogItemsById(backlogItemId)
-    if(userId !== backlogItem.creatorId.toString()) {
-    throw new Forbidden ('You do not have authorization')
+    if (userId !== backlogItem.creatorId.toString()) {
+      throw new Forbidden('You do not have authorization')
     }
     await backlogItem.remove()
     return backlogItem
