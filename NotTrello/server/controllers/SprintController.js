@@ -4,7 +4,7 @@ import BaseController from '../utils/BaseController'
 
 export class SprintController extends BaseController {
   constructor() {
-    super('api/sprints')
+    super('api/projects/:projectId/sprints')
     this.router
       .get('', this.getSprints)
       .get('/:sprintId', this.getSprint)
@@ -16,7 +16,7 @@ export class SprintController extends BaseController {
 
   async getSprints(req, res, next) {
     try {
-      const sprints = await sprintService.getSprints(req.query)
+      const sprints = await sprintService.getSprints({ projectId: req.params.projectId })
       res.send(sprints)
     } catch (error) {
       next(error)
