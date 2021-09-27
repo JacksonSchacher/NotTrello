@@ -12,12 +12,6 @@ export class ProjectController extends BaseController {
     .delete('/:projectId', this.deleteProject)
 
   }
-  async deleteProject(req, res, next) {
-    try {
-      await projectService.deleteProject()
-    } catch (error) {
-    }
-  }
   async createProject(req, res, next) {
     try {
       await projectService.createProject()
@@ -32,4 +26,10 @@ export class ProjectController extends BaseController {
       
     }
   }
+async deleteProject(req, res, next) {
+  try {
+    await projectService.deleteProject()
+  } catch (error) {
+  }
+}
 }
