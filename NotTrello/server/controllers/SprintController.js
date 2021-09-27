@@ -34,7 +34,27 @@ export class SprintController extends BaseController {
 
   async createSprint(req, res, next) {
     try {
+      req.body.creatorId = req.userInfo.id
+      const sprint = await sprintService.createSprint(req.body)
+      res.send(sprint)
+    } catch (error) {
+      next(error)
+    }
+  }
 
+  async deleteSprint(req, res, next) {
+    try {
+      const sprint = await sprintService.deleteSprint(req.params.sprintId, req.userInfo.id)
+      res.send(sprint)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async editSprint(req, res, next) {
+    try {
+      const sprint = await sprintService.editSprint(req.params.sprintId, req.userInfo.id, req.body)
+      res.send(sprint)
     } catch (error) {
       next(error)
     }
