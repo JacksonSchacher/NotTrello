@@ -19,12 +19,12 @@ TaskSchema.virtual('backlogItem', {
   justOne: true,
   ref: 'BacklogItem'
 })
-// TaskSchema.virtual('project', {
-//   localField: 'projectId',
-//   foreignField: '_id',
-//   justOne: true,
-//   ref: 'Project'
-// })
+TaskSchema.virtual('project', {
+  localField: 'projectId',
+  foreignField: '_id',
+  justOne: true,
+  ref: 'Project'
+})
 TaskSchema.virtual('creator', {
   localField: 'creatorId',
   foreignField: '_id',
