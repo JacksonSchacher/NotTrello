@@ -3,8 +3,8 @@ const Schema = mongoose.Schema
 
 export const NoteSchema = new Schema({
   body: { type: String, required: true },
-  backlogItemId: { type: Schema.Types.ObjectId, required: true, ref: 'BacklogItem' },
-  projectId: { type: Schema.Types.ObjectId, required: true, ref: 'Project' },
+  backlogItemId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'BacklogItem' },
+  projectId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Project' },
   creatorId: { type: Schema.Types.ObjectId, required: true, ref: 'Account' }
 },
 { timestamps: true, toJSON: { virtuals: true } }

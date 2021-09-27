@@ -4,11 +4,11 @@ const Schema = mongoose.Schema
 export const TaskSchema = new Schema({
   name: { type: String, required: true },
   weight: { type: Number, required: true },
-  projectId: { type: Schema.Types.ObjectId, required: true, ref: 'Project' },
-  backlogItemId: { type: Schema.Types.ObjectId, required: true, ref: 'BacklogItem' },
+  projectId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Project' },
+  backlogItemId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'BacklogItem' },
   creatorId: { type: Schema.Types.ObjectId, required: true, ref: 'Account' },
   completedOn: { type: Date },
-  assignedTo: { type: Schema.Types.ObjectId, required: true, ref: 'Profile' }
+  assignedTo: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Profile' }
 },
 { timestamps: true, toJSON: { virtuals: true } }
 )
