@@ -31,8 +31,8 @@ TaskSchema.virtual('creator', {
   justOne: true,
   ref: 'Account'
 })
-TaskSchema.virtual('assignedTo', {
-  localField: 'assignedToId',
+TaskSchema.virtual('creator', {
+  localField: 'creatorId',
   foreignField: '_id',
   justOne: true,
   ref: 'Profile'
