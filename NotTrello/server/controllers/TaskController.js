@@ -34,6 +34,7 @@ export class TaskController extends BaseController {
 
   async createTask(req, res, next) {
     try {
+      req.body.projectId = req.params.projectId
       req.body.creatorId = req.userInfo.id
       const task = await taskService.createTask(req.body)
       res.send(task)
