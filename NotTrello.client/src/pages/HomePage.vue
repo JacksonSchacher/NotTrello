@@ -11,17 +11,18 @@
             </button>
       </div>
     </div>
-
-<Projects v-for="p in projects" :key="p.id" :project="p"/>
-
   </div>
+
+<div class="container-fluid" v-for="p in projects" :key="p.id">
+<Projects :project="p"/>
+</div>
 
     <Modal id="createProject-modal">
       <template #modal-title>
        Create Project
       </template>
       <template #modal-body>
-        <CreateProjectForm :projects="project" />
+        <CreateProjectForm />
       </template>
     </Modal>
 </template>
@@ -32,20 +33,26 @@ import { AppState } from '../AppState'
 import { projectsService } from '../services/ProjectsService'
 import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
+import { Project } from '../models/Project'
+import { useRoute } from 'vue-router'
+
 export default {
   name: 'Home',
+  // props: {
+  //  project: { type: Project, required: true } },
   setup() {
-     const account = computed(() => AppState.account)
-  onMounted(async () => {
+    const route = useRoute()
+
+  onMounted( async () => {
       try {
-        await projectsService.getProjects()
+       await projectsService.getProjects()
       } catch (error) {
         Pop.toast(error.message, 'error')
         logger.log(error.message)
       }
     })
     return {
-      account,
+      account: computed(() => AppState.account),
       projects: computed(() => AppState.projects)
     }
   }

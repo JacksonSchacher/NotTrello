@@ -4,5 +4,6 @@ export class Project{
     this.description = projectData.description
     this.creatorId = projectData.creatorId
     this.id = projectData.id
+    this.createdAt = projectData.createdAt
   }
 }

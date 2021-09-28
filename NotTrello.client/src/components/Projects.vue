@@ -1,7 +1,11 @@
 <template>
+<div class="row">
 <div class="col-md-6">
-{{ projects.name }}
-  
+<p>{{ project.name }}</p>
+<div class="col-md-6">
+<p>{{ project.description }}</p>
+</div>
+</div>
 </div>
 </template>
 
@@ -12,13 +16,12 @@ import { AppState } from '../AppState.js'
 
 export default {
   props: {
-    projects: { type: Project, required: true }
+    project: { type: Project, required: true } 
   },
   setup(props) {
     return {
-      project: computed(() => AppState.projects)
-      }
     }
+}
 }
 </script>
 

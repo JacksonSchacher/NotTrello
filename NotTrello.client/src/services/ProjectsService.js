@@ -1,25 +1,26 @@
 import { AppState } from "../AppState"
 import { Project } from "../models/Project"
 import { logger } from "../utils/Logger"
+import { convertToQuery } from "../utils/Query"
 import { api } from './AxiosService.js'
 
 class ProjectsService{
 
   async getProjects(){
-    AppState.projects = []
     const res = await api.get('api/projects/')
+    logger.log(res)
     AppState.projects = res.data.map(p => new Project(p))
   }
   
   async getProjectById(projectId){
-    AppState.projects= null
-    const res = await api.get('api/projects')
+    const res = await api.get(`api/projects/${projectId}`)
     AppState.projects = new Project(res.data)
   }
   async createProject(project){
   const res = await api.post('api/projects', project)
   AppState.projects.push(new Project(res.data))
   logger.log('create project', res)
+  logger.log(AppState.projects)
   }
   async editProjects(project){
     const res = await api.put('api/projects', project)
