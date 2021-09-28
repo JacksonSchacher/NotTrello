@@ -12,7 +12,6 @@ class NotesService {
   }
 
   async createNote(body) {
-    await this.getNoteById(body.projectId)
     const note = await dbContext.Note.create(body)
     return note
   }
