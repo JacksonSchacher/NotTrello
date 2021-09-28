@@ -1,5 +1,5 @@
 <template>
-  
+  <BacklogItem />
 </template>
 
 <script>
