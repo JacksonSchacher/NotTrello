@@ -7,9 +7,9 @@ export const TaskSchema = new Schema({
   projectId: { type: Schema.Types.ObjectId, required: true, ref: 'Project' },
   backlogItemId: { type: Schema.Types.ObjectId, required: true, ref: 'BacklogItem' },
   creatorId: { type: Schema.Types.ObjectId, required: true, ref: 'Account' },
-  completed: { type: Boolean },
+  isComplete: { type: Boolean},
   completedOn: { type: Date },
-  assignedTo: { type: Schema.Types.ObjectId, required: true, ref: 'Account' }
+  assignedTo: { type: Schema.Types.ObjectId, ref: 'Profile' }
 },
 { timestamps: true, toJSON: { virtuals: true } }
 )
@@ -32,9 +32,9 @@ TaskSchema.virtual('project', {
   justOne: true,
   ref: 'Project'
 })
-// TaskSchema.virtual('creator', {
-//   localField: 'creatorId',
-//   foreignField: '_id',
-//   justOne: true,
-//   ref: 'Profile'
-// })
+TaskSchema.virtual('creator', {
+  localField: 'creatorId',
+  foreignField: '_id',
+  justOne: true,
+  ref: 'Profile'
+})
