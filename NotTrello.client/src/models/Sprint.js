@@ -6,5 +6,6 @@ export class Sprint {
     this.id = sprintData.id
     this.projectId = sprintData.projectId
     this.creatorId = sprintData.creatorId
+    this.isOpen = sprintData.isOpen
   }
 }
