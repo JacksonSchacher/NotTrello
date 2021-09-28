@@ -5,7 +5,6 @@ import { convertToQuery } from "../utils/Query"
 import { api } from './AxiosService.js'
 
 class ProjectsService{
-
   async getProjects(){
     const res = await api.get('api/projects/')
     logger.log(res)
