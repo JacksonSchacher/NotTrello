@@ -1,6 +1,7 @@
 import BaseController from '../utils/BaseController'
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { projectService } from '../services/ProjectService'
+import { query } from 'express'
 
 export class ProjectController extends BaseController {
   constructor() {
@@ -35,7 +36,7 @@ export class ProjectController extends BaseController {
 
   async getProjects(req, res, next) {
     try {
-      const projects = await projectService.getProjects()
+      const projects = await projectService.getProjects({ creatorId: req.userInfo.id })
       res.send(projects)
     } catch (error) {
       next(error)
