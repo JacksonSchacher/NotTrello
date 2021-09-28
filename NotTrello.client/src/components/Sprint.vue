@@ -1,7 +1,7 @@
 <template>
   <div class="col-md-6">
-    <h4>{{ sprints.name }}</h4>
-    <p>{{  }}</p>
+    <!-- <h4>{{ sprints.name }}</h4>
+    <p>{{  }}</p> -->
   </div>
 </template>
 
