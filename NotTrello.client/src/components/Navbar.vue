@@ -8,7 +8,7 @@
           height="45"
         />
       </div>
-      <p class="ms-2 mt-3 text-black">SPRINTR</p>
+      <p class="ms-2 mt-3 text-black">!Trello</p>
     </router-link>
     <button
       class="navbar-toggler"
