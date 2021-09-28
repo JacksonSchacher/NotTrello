@@ -26,5 +26,5 @@ NoteSchema.virtual('creator', {
   localField: 'creatorId',
   foreignField: '_id',
   justOne: true,
-  ref: 'Account'
+  ref: 'Profile'
 })
