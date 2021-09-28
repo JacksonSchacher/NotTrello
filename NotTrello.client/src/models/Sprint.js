@@ -1,5 +1,5 @@
-export class Sprint{
-  constructor(sprintData){
+export class Sprint {
+  constructor(sprintData) {
     this.name = sprintData.name
     this.startDate = sprintData.startDate
     this.endDate = sprintData.endDate
