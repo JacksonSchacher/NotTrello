@@ -1,9 +1,7 @@
 <template>
  <div class="container-fluid">
    <div class="row">
-     <div class="col-6">
-       <h1>TESTING</h1>
-     </div>
+     <Sprint />
    </div>
  </div>
 </template>
