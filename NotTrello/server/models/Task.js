@@ -7,6 +7,7 @@ export const TaskSchema = new Schema({
   projectId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Project' },
   backlogItemId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'BacklogItem' },
   creatorId: { type: Schema.Types.ObjectId, required: true, ref: 'Account' },
+  completed: { type: Boolean },
   completedOn: { type: Date },
   assignedTo: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Profile' }
 },
