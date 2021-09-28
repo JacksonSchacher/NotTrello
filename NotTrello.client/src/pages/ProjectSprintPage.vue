@@ -18,9 +18,8 @@ name: 'Sprint',
   setup(){
     const route = useRoute()
   onMounted( async () => {
-    debugger
     try {
-      await sprintsService.getSprints(route.params.projectId)
+      await sprintsService.getSprints(route.params.id)
     } catch (error) {
       Pop.toast(error.message, 'error')
       logger.log('getSprints onMounted', error.message)
@@ -28,7 +27,7 @@ name: 'Sprint',
   })
   return{
     route,
-    sprint: computed(() => AppState.sprints),
+    sprints: computed(() => AppState.sprints),
     project: computed(() => AppState.projects)
   }
 }

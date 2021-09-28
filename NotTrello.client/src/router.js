@@ -28,7 +28,7 @@ const routes = [
         component: loadPage('ProjectBacklogPage')
       },
       {
-        path: 'sprint',
+        path: 'sprints',
         name: 'Project.Sprint',
         component: loadPage('ProjectSprintPage')
       }

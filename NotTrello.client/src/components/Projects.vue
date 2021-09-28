@@ -4,7 +4,7 @@
       <div class="col-2">
     <p>{{ project.name }}</p>
       </div>
-      <div class="col-2">
+      <div class="col-2" v-if="project.creator">
         <img :src="project.creator.picture" class="rounded-circle" height="45" alt="">
       </div>
       <div class="col-2">

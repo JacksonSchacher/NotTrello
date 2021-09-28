@@ -18,7 +18,7 @@ class ProjectsService{
   }
   async createProject(project){
   const res = await api.post('api/projects', project)
-  AppState.projects = AppState.projects.push(new Project(res.data))
+  AppState.projects.push(new Project(res.data))
   logger.log('create project', res)
   logger.log('create project, appstate.projects', AppState.projects)
   }
