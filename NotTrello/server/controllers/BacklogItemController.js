@@ -53,7 +53,8 @@ export class BacklogItemController extends BaseController {
 
   async deleteBacklogItem(req, res, next) {
     try {
-      await backlogItemsService.deleteBacklogItem()
+      const backlog = await backlogItemsService.deleteBacklogItem(req.params.backlogItemId, req.userInfo.id)
+      res.send(backlog)
     } catch (error) {
       next(error)
     }

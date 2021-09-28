@@ -10,7 +10,7 @@ class TaskService {
     task.name = body.name || task.name
     task.weight = body.weight || task.weight
     task.completedOn = body.completedOn || task.completedOn
-    task.completed = body.completed || task.completed
+    task.isComplete = body.isComplete || task.isComplete
     await task.save()
     return task
   }
