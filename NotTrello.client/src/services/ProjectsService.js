@@ -32,5 +32,11 @@ class ProjectsService{
     AppState.sprints = null
     AppState.sprints.filter(s => s.id !== sprintId)
   }
+
+  async getBacklog(projectId){
+    const res = await api.get(`api/projects/${projectId}/backlog`)
+    logger.log(res)
+    AppState.backlogs = res.data.map(b => new Backlog(b))
+  }
   }
   export const projectsService = new ProjectsService()
