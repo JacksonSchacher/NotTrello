@@ -4,7 +4,7 @@
     <label for="name" class="">Name:</label>
     <input 
     type="text" 
-    class="form-control" 
+    class="form-control bg-white" 
     name="name" 
     id="name" 
     placeholder="Name..."
@@ -12,15 +12,15 @@
     required>
   </div>
 
-   <div class="form-group">
+   <div class="form-group mt-4">
     <label for="description" class="">Description:</label>
     <input 
     type="text" 
-    class="form-control" 
+    class="form-control description bg-white" 
     name="description" 
     id="description" 
     placeholder="description..."
-    v-model="editable.name" 
+    v-model="editable.description" 
     required>
   </div>
   
@@ -31,23 +31,22 @@
 </template>
   
   <script>
-import { Project } from '../models/Project'
 import { ref } from '@vue/reactivity'
-import { watchEffect } from '@vue/runtime-core'
+import { computed, watchEffect } from '@vue/runtime-core'
 import Pop from '../utils/Pop'
 import { projectsService } from '../services/ProjectsService'
+import { AppState } from '../AppState'
 
 
   export default {
-    props: {
-      projects: {type: Project, default: true}
-    },
-    setup(props) {
+    setup() {
       const editable = ref({})
       watchEffect(() => {
-        editable.value = {...props.projects}
+        editable.value = {}
       })
       return {
+        account: computed(() => AppState.account),
+        projects: computed(() => AppState.projects),
         editable,
         async submitProjectForm(){
           try {
@@ -65,6 +64,8 @@ import { projectsService } from '../services/ProjectsService'
   }
   </script>
   
-  <style>
-  
+  <style scoped lang="scss">
+  .description{
+    height: 6rem;
+  }
   </style>
