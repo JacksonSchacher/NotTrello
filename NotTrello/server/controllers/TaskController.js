@@ -59,5 +59,4 @@ export class TaskController extends BaseController {
       next(error)
     }
   }
-
 }
