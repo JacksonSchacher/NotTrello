@@ -5,14 +5,20 @@ export const TaskSchema = new Schema({
   name: { type: String, required: true },
   weight: { type: Number, required: true },
   projectId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Project' },
-  backlogItemId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'BacklogItem' },
-  creatorId: { type: Schema.Types.ObjectId, required: true, ref: 'Account' },
-  completedOn: { type: Date },
-  assignedTo: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Profile' }
+  backlogItemId: { type: Schema.Types.ObjectId, required: true, ref: 'BacklogItem' },
+  creatorId: { type: Schema.Types.ObjectId, ref: 'Account', required: true },
+  completedOn: { type: Date},
+  assignedTo: { type: Schema.Types.ObjectId, ref: 'Account' }
 },
 { timestamps: true, toJSON: { virtuals: true } }
 )
 
+TaskSchema.virtual('creator', {
+  localField: 'creatorId',
+  foreignField: '_id',
+  justOne: true,
+  ref: 'Account'
+})
 TaskSchema.virtual('backlogItem', {
   localField: 'backlogItemId',
   foreignField: '_id',
@@ -25,15 +31,9 @@ TaskSchema.virtual('project', {
   justOne: true,
   ref: 'Project'
 })
-TaskSchema.virtual('creator', {
-  localField: 'creatorId',
-  foreignField: '_id',
-  justOne: true,
-  ref: 'Account'
-})
-TaskSchema.virtual('creator', {
-  localField: 'creatorId',
-  foreignField: '_id',
-  justOne: true,
-  ref: 'Profile'
-})
+// TaskSchema.virtual('creator', {
+//   localField: 'creatorId',
+//   foreignField: '_id',
+//   justOne: true,
+//   ref: 'Profile'
+// })
