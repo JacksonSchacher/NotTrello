@@ -22,10 +22,7 @@
         <h6>Members:</h6>
       </div>
       <div class="col-2">
-      <h6> Started On:  <button class="btn selectable" @click="toggleAscending">
-          <i class="mdi mdi-arrow-up" v-if="ascending"></i>
-          <i class="mdi mdi-arrow-down" v-else></i>
-        </button></h6>
+      <h6> Started On:</h6>
       </div>
       </div>
   </div>
@@ -61,29 +58,18 @@ export default {
   // props: {
   //  project: { type: Project, required: true } },
   setup() {
-    const ascending = ref(true)
-    function projectSorter(a, b){
-      if (ascending.value) {
-        return b.createdAt - a.createdAt
-      }
-      return a.createdAt - b.createdAt
-    }
 
   onMounted( async () => {
       try {
        await projectsService.getProjects()
       } catch (error) {
         Pop.toast(error.message, 'error')
-        logger.log(error.message)
+        logger.log('getProjects onMounted' ,error.message)
       }
     })
     return {
-      ascending,
       account: computed(() => AppState.account),
-      projects: computed(() => AppState.projects.sort(projectSorter)),
-      toggleAscending() {
-        ascending.value =!ascending.value
-      }
+      projects: computed(() => AppState.projects),
     }
   }
 }

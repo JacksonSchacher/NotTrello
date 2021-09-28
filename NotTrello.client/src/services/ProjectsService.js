@@ -29,11 +29,19 @@ class ProjectsService {
     AppState.projects = new Project(res.data)
     logger.log('edit project', res)
   }
+<<<<<<< HEAD
 
   async deleteSprint(projectId, sprintId) {
     const res = await api.delete(`api/projects/${projectId}/sprints/${sprint.id}`)
     AppState.sprints = null
     AppState.sprints.filter(s => s.id !== sprintId)
+=======
+  
+  async deleteProject(projectId) {
+    const res = await api.delete(`api/projects/` + projectId)
+    logger.log('delete project in service', res)
+    AppState.projects = AppState.projects.filter(p => p.id !== projectId)
+>>>>>>> 696cea212089f0623148a0237e5c17507ee45930
   }
 
   async getBacklog(projectId) {
