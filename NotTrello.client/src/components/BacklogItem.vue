@@ -9,7 +9,7 @@
                 aria-expanded="false"
                 aria-controls="flush-collapseOne"
         >
-          Accordion Item #1
+          {{ backlog.name }}
         </button>
       </h2>
       <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -22,7 +22,11 @@
 </template>
 
 <script>
+import { Backlog } from '../models/Backlog'
 export default {
+  props: {
+    backlog: { type: Backlog, required: true }
+  }
 
 }
 </script>
