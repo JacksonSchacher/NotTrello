@@ -25,7 +25,19 @@ const routes = [
   {
     path: '/project/:id',
     name: 'Project',
-    component: loadPage('ProjectPage')
+    component: loadPage('ProjectPage'),
+    children: [
+      {
+      path: 'backlog',
+      name: 'Project.Backlog',
+      component: loadPage('ProjectBacklogPage')
+      },
+      {
+        path: 'sprint',
+        name: 'Project.Sprint',
+        component: loadPage('ProjectSprintPage')
+      }
+    ]
   }
 ]
 
