@@ -8,7 +8,7 @@ export const SprintSchema = new Schema(
     endDate: { type: Date, required: true },
     projectId: { type: Schema.Types.ObjectId, ref: 'Project', required: true },
     creatorId: { type: Schema.Types.ObjectId, ref: 'Account', required: true },
-    isOpen: { type: Boolean }
+    isOpen: { type: Boolean, default: true }
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )
