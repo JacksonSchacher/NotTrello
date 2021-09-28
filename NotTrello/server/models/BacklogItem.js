@@ -10,7 +10,8 @@ export const BacklogItemSchema = new Schema(
     sprintId: { type: mongoose.Schema.Types.ObjectId, ref: 'Sprint', required: false },
     creatorId: { type: Schema.Types.ObjectId, ref: 'Account', required: true },
     color: { type: String }
-  }
+  },
+  { timestamps: true, toJSON: { virtuals: true } }
 )
 
 BacklogItemSchema.virtual('creator', {
