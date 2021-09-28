@@ -13,6 +13,7 @@ class NotesService {
 
   async createNote(body) {
     const note = await dbContext.Note.create(body)
+    await note.populate('creator', 'name picture')
     return note
   }
 
