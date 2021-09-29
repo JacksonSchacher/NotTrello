@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="submitProjectForm">
+  <form @submit.prevent="submitProjectForm(projects.id)">
     <div class="form-group">
       <label for="name" class="">Name:</label>
       <input
@@ -40,6 +40,7 @@ import { computed, watchEffect } from '@vue/runtime-core'
 import Pop from '../utils/Pop'
 import { projectsService } from '../services/ProjectsService'
 import { AppState } from '../AppState'
+import { router } from '../router'
 
 export default {
   setup() {
@@ -51,12 +52,13 @@ export default {
       account: computed(() => AppState.account),
       projects: computed(() => AppState.projects),
       editable,
-      async submitProjectForm() {
+      async submitProjectForm(projectId) {
         try {
           editable.value.id
             ? await projectsService.editProject(editable.value)
             : await projectsService.createProject(editable.value)
           editable.value = {}
+          router.push({name: 'Project', params: {id: projectId}})
         } catch (error) {
           Pop.toast(error.message, 'error')
         }

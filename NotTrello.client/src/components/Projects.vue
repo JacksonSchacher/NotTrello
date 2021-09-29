@@ -1,5 +1,5 @@
 <template>
-  <div class="card-body selectable" @click="goToBacklog(project.id)">
+  <div class="card-body selectable" @click="goToProjectPage(project.id)">
     <div class="row justify-content-between mx-5">
       <div class="col-2">
     <p>{{ project.name }}</p>
@@ -9,7 +9,7 @@
       </div>
       <div class="col-2">
       <div class="position-absolute" style="right: 1rem;" v-if="account.id == project.creatorId">
-       <i class="mdi mdi-delete f-20 selectable" @click="deleteProject()"></i>
+       <i class="mdi mdi-delete f-20 selectable" @click="deleteProject(project.id)"></i>
         </div>
     <p>{{ new Date(project.createdAt).toDateString() }}</p>
       </div>
@@ -34,17 +34,18 @@ export default {
     return {
       account: computed(() => AppState.account),
 
-      async deleteProject(){
+      async deleteProject(projectId){
         try {
           const yes = await Pop.confirm('Are you sure you want to delete?')
           if(!yes) { return }
           await projectsService.deleteProject(props.project.id)
+          router.push({name: 'Home'})
         } catch (error) {
           logger.log('delteProject in Project.vue', error.message)
           Pop.toast(error.message, 'error')
         }
       },
-      async goToBacklog(projectId){
+      async goToProjectPage(projectId){
         try {
           await projectsService.getBacklog(projectId)
           router.push({name: 'Project', params: {id: projectId}})
