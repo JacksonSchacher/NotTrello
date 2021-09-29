@@ -1,12 +1,26 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-       <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Sprint-modal">
-          Create New Sprint
-        </button>
-      <Sprint v-for="s in sprints" :key="s.id" :sprint="s" />
-      <div>{{sprints}}</div>
+      <div class="col-8 m-auto">
+        <div class="card bg-dark">
+          <div class="row justify-content-between mx-2">
+            <div class="col-4 py-2 text-light">
+              <h4>{{ currentProject.name }} Sprints</h4>
+              <p>{{ currentProject.description }}</p>
+            </div>
+            <div class="col-2 align-self-end py-2">
+               <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Sprint-modal">
+                 Create New Sprint
+              </button>
+            </div>
+          </div>
+          <div class="sprint">
+             <Sprint v-for="s in sprints" :key="s.id" :sprint="s" />
+          </div>
+        </div>
+      </div>
     </div>
+
   </div>
 
   <Modal id="Sprint-modal">
@@ -41,7 +55,8 @@ export default {
     })
     return {
       route,
-      sprints: computed(() => AppState.sprints)
+      sprints: computed(() => AppState.sprints),
+      currentProject: computed(() => AppState.currentProject)
       // project: computed(() => AppState.projects)
     }
   }
