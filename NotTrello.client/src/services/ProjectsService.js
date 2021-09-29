@@ -22,6 +22,7 @@ class ProjectsService {
     AppState.projects.push(new Project(res.data))
     logger.log('create project', res)
     logger.log('create project, appstate.projects', AppState.projects)
+    return res.data.id
   }
 
   async editProjects(project) {

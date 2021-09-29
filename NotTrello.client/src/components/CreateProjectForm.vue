@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="submitProjectForm(projects.id)">
+  <form @submit.prevent="submitProjectForm">
     <div class="form-group">
       <label for="name" class="">Name:</label>
       <input
@@ -41,6 +41,8 @@ import Pop from '../utils/Pop'
 import { projectsService } from '../services/ProjectsService'
 import { AppState } from '../AppState'
 import { router } from '../router'
+import { Project } from '../models/Project'
+import { logger } from '../utils/Logger'
 
 export default {
   setup() {
@@ -50,22 +52,23 @@ export default {
     })
     return {
       account: computed(() => AppState.account),
-      projects: computed(() => AppState.projects),
+      project: computed(() => AppState.projects),
       editable,
-      async submitProjectForm(projectId) {
+      async submitProjectForm() {
         try {
+          debugger
           editable.value.id
-            ? await projectsService.editProject(editable.value)
-            : await projectsService.createProject(editable.value)
+          // await projectsService.editProject(editable.value)
+          const newProject = await projectsService.createProject(editable.value)
+          router.push({name: 'Project', params: {id: newProject}})
           editable.value = {}
-          router.push({name: 'Project', params: {id: projectId}})
         } catch (error) {
           Pop.toast(error.message, 'error')
         }
       }
-    }
   }
 
+}
 }
 </script>
 

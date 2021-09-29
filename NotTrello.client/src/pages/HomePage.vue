@@ -55,8 +55,6 @@ import { useRoute } from 'vue-router'
 
 export default {
   name: 'Home',
-  // props: {
-  //  project: { type: Project, required: true } },
   setup() {
 
   onMounted( async () => {
