@@ -1,8 +1,9 @@
 <template>
-  <div class="accordion accordion-flush" id="accordionFlushExample">
+  <div class="accordian accordion-flush" id="accordionFlushExample">
     <div class="accordion-item">
       <div class="row">
-        <div class="accordion-header col-11" id="flush-headingOne">
+
+        <div class="accordion-header col" id="flush-headingOne">
           <button class="accordion-button collapsed"
                   type="button"
                   data-bs-toggle="collapse"
@@ -22,9 +23,11 @@
             <h4>Tasks Completed</h4>
           </button>
         </div>
+
         <div class="d-flex col-1 align-items-center">
-          <i class="mdi mdi-delete f-24 selectable" @click="addTask(backlog.id)"></i>
+          <i class="mdi mdi-delete f-24 selectable" @click="deleteBacklogItem(backlog.id)"></i>
         </div>
+
       </div>
       <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
         <div class="accordion-body">
@@ -81,6 +84,5 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped lang="scss">
 </style>

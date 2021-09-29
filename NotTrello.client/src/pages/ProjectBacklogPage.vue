@@ -2,14 +2,14 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-8 m-auto">
-        <div class="card bg-dark">
+        <div class="card shadow">
           <div class="row justify-content-between mx-2">
-            <div class="col-4 py-2 text-light">
+            <div class="col-4 py-2 project">
               <h4>{{ currentProject.name }} Backlog Items</h4>
               <p>{{ currentProject.description }}</p>
             </div>
             <div class="col-2 align-self-end py-2">
-              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#BacklogItem-modal">
+              <button class="btn create-button" data-bs-toggle="modal" data-bs-target="#BacklogItem-modal">
                 Create Backlog Item
               </button>
             </div>
@@ -59,5 +59,21 @@ export default {
 </script>
 
 <style>
-
+.card{
+  background-color: rgba(0, 0, 0, 0.616);
+  color: white;
+  backdrop-filter: blur(4px);
+}
+.project{
+  text-shadow: 2px 1px 2px #000000;
+}
+.create-button{
+   border: solid #BABEF8;
+  color: white;  
+}
+.create-button:hover{
+  border: solid #29ADF8;
+  background-color: rgba(0, 0, 0, 0.192);
+  color: white;
+}
 </style>
