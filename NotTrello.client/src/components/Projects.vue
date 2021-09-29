@@ -1,17 +1,19 @@
 <template>
-  <div class="card-body selectable" @click="goToProjectPage(project.id)">
-    <div class="row justify-content-between mx-5">
-      <div class="col-2">
-        <p>{{ project.name }}</p>
-      </div>
-      <div class="col-2" v-if="project.creator">
-        <img :src="project.creator.picture" class="rounded-circle" height="45" alt="">
-      </div>
-      <div class="col-2">
-        <div class="position-absolute" style="right: 1rem;" v-if="account.id == project.creatorId">
-          <i class="mdi mdi-delete f-20 selectable" @click="deleteProject(project.id)"></i>
+  <div class="row">
+    <div class="card-body selectable" @click="goToProjectPage(project.id)">
+      <div class="row justify-content-between mx-5">
+        <div class="col-2">
+          <p>{{ project.name }}</p>
         </div>
-        <p>{{ new Date(project.createdAt).toDateString() }}</p>
+        <div class="col-2" v-if="project.creator">
+          <img :src="project.creator.picture" class="rounded-circle" height="45" alt="">
+        </div>
+        <div class="col-2">
+          <div class="position-absolute" style="right: 1rem;" v-if="account.id == project.creatorId">
+            <i class="mdi mdi-delete f-20 selectable" @click="deleteProject(project.id)"></i>
+          </div>
+          <p>{{ new Date(project.createdAt).toDateString() }}</p>
+        </div>
       </div>
     </div>
   </div>
