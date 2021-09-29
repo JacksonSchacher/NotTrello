@@ -3,7 +3,7 @@
     <div class="accordion-item">
       <div class="row">
 
-        <div class="accordion-header col" id="flush-headingOne">
+        <div class="accordion-header col-11" id="flush-headingOne">
           <button class="accordion-button collapsed"
                   type="button"
                   data-bs-toggle="collapse"
@@ -11,24 +11,23 @@
                   aria-expanded="true"
                   aria-controls="flush-collapseOne"
           >
-            <i class="mdi mdi-folder f-24"></i>
+            <i class="mdi mdi-folder f-24 mb-2"></i>
 
             <h4>{{ backlog.name }}</h4>
-            <div>Sprints go here</div>
-            <i class="mdi mdi-weight"></i>
-            <button>Details</button>
-            <button data-bs-toggle="modal" data-bs-target="#Task-modal" @click="addTask(backlog.id)">
+            <div class="mx-3">Sprints go here</div>
+            <i class="mdi mdi-weight me-3"></i>
+            <button class="mx-3">Details</button>
+            <button data-bs-toggle="modal" class="me-5" data-bs-target="#Task-modal" @click="addTask(backlog.id)">
               Add Task
             </button>
-            <h4>Tasks Completed</h4>
+            <h4 class="ms-5">Tasks Completed</h4>
           </button>
         </div>
-
-        <div class="d-flex col-1 align-items-center">
+        <div class="d-flex col-1 align-items-center text-dark">
           <i class="mdi mdi-delete f-24 selectable" @click="deleteBacklogItem(backlog.id)"></i>
         </div>
-
       </div>
+
       <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
         <div class="accordion-body">
           <div v-for="t in tasks" :key="t.id">
