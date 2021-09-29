@@ -37,8 +37,16 @@ $color-ranges: (
 );
 
 // Custom Variables
-
-$dark-bg-grad: linear-gradient(156deg, rgba(97,107,96,1) 0%, rgba(20,20,20,1) 100%);
+:root {
+  --dark-bg-grad: linear-gradient(156deg, rgba(97,107,96,1) 0%, rgba(20,20,20,1) 100%);
+  --red-bg-grad: linear-gradient(156deg, rgba(224,159,159,1) 0%, rgba(147,8,36,1) 100%);
+  --orange-bg-grad: linear-gradient(156deg, rgba(222,224,159,1) 0%, rgb(235, 154, 41) 100%);
+  --yellow-bg-grad: linear-gradient(156deg, rgba(254,242,213,1) 0%, rgba(221,215,41,1) 100%);
+  --green-bg-grad: linear-gradient(156deg, rgba(213,254,253,1) 0%, rgba(19,143,40,1) 100%);
+  --blue-bg-grad: linear-gradient(156deg, rgba(224,213,254,1) 0%, rgba(19,96,143,1) 100%);
+  --purple-bg-grad: linear-gradient(156deg, rgba(254,213,251,1) 0%, rgba(79,19,143,1) 100%);
+  --light-bg-grad: linear-gradient(156deg, rgba(249,249,249,1) 9%, rgba(164,175,173,1) 100%);
+}
 // $red-bg-grad
 // $orange-bg-grad
 // $yellow-bg-grad

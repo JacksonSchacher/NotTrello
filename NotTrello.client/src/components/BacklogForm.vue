@@ -107,30 +107,31 @@ export default {
 .btn-color {
   width: 50%;
 }
-// .btn-color[value="dark"] {
-//   background: $dark-bg-grad;
-// }
-// .btn-color[value="red"] {
-//   background-color: var(--red-bg-grad);
-// }
-// .btn-color[value="orange"] {
-//   background-color: var(--orange-bg-grad);
-// }
-// .btn-color[value="yellow"] {
-//   background-color: var(--yellow-bg-grad);
-// }
-// .btn-color[value="green"] {
-//   background-color: var(--green-bg-grad);
-// }
-// .btn-color[value="blue"] {
-//   background-color: var(--blue-bg-grad);
-// }
-// .btn-color[value="purple"] {
-//   background-color: var(--purple-bg-grad);
-// }
-// .btn-color[value="light"] {
-//   background-color: var(--light-bg-grad);
-// }
+.btn-color[value="dark"] {
+  background: var(--dark-bg-grad);
+  color:white;
+}
+.btn-color[value="red"] {
+  background: var(--red-bg-grad);
+}
+.btn-color[value="orange"] {
+  background: var(--orange-bg-grad);
+}
+.btn-color[value="yellow"] {
+  background: var(--yellow-bg-grad);
+}
+.btn-color[value="green"] {
+  background: var(--green-bg-grad);
+}
+.btn-color[value="blue"] {
+  background: var(--blue-bg-grad);
+}
+.btn-color[value="purple"] {
+  background: var(--purple-bg-grad);
+}
+.btn-color[value="light"] {
+  background: var(--light-bg-grad);
+}
 .dropdown-menu {
   width: 19vw;
 }
