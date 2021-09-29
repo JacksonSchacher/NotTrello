@@ -22,5 +22,10 @@ class BacklogService {
     logger.log('Deleted Backlog Item', res)
     AppState.backlogs = AppState.backlogs.filter(b => b.id !== backlogId)
   }
+
+  async setBacklog(backlogId) {
+    AppState.currentBacklog = AppState.backlogs.find(b => b.id === backlogId)
+    logger.log('set Backlog', AppState.currentBacklog)
+  }
 }
 export const backlogService = new BacklogService()

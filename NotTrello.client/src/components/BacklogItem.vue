@@ -16,14 +16,14 @@
             <div>Sprints go here</div>
             <i class="mdi mdi-weight"></i>
             <button>Details</button>
-            <button>
+            <button data-bs-toggle="modal" data-bs-target="#Task-modal" @click="addTask(backlog.id)">
               Add Task
             </button>
             <h4>Tasks Completed</h4>
           </button>
         </div>
         <div class="d-flex col-1 align-items-center">
-          <i class="mdi mdi-delete f-24 selectable" @click="deleteBacklogItem(backlog.id)"></i>
+          <i class="mdi mdi-delete f-24 selectable" @click="addTask(backlog.id)"></i>
         </div>
       </div>
       <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -35,6 +35,14 @@
       </div>
     </div>
   </div>
+  <Modal id="Task-modal">
+    <template #modal-title>
+      Create Task
+    </template>
+    <template #modal-body>
+      <TaskForm />
+    </template>
+  </Modal>
 </template>
 
 <script>
@@ -62,7 +70,7 @@ export default {
       },
       async addTask(backlogId) {
         try {
-          await taskService.createTask(route.params.id, backlogId)
+          await backlogService.setBacklog(backlogId)
         } catch (error) {
           Pop.toast(error.message, 'error')
         }

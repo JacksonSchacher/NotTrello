@@ -12,5 +12,6 @@ export const AppState = reactive({
   /** @type {import('.model/Backlog.js').Backlog[]} */
   backlogs: [],
   /** @type {import('.model/Task.js').Task[]} */
-  tasks: []
+  tasks: [],
+  currentBacklog: {}
 })
