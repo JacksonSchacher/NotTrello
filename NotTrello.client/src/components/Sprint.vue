@@ -1,6 +1,7 @@
 <template>
   <div class="col-md-6">
-    <h4>{{ sprint.name }}</h4>
+    <!-- <h4>{{ sprint.name }}</h4> -->
+    one sprint
   </div>
 </template>
 
@@ -12,7 +13,7 @@ import { logger } from '../utils/Logger'
 import Pop from '../utils/Pop'
 export default {
   props: {
-    sprint: { type: Sprint, required: true }
+    sprint: { type: Object, required: true }
   },
   setup() {
   }

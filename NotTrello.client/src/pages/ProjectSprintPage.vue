@@ -28,7 +28,6 @@ import { AppState } from '../AppState'
 import { useRoute } from 'vue-router'
 import { projectsService } from '../services/ProjectsService'
 export default {
-  name: 'Sprint',
   setup() {
     const route = useRoute()
     onMounted(async() => {
