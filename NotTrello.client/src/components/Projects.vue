@@ -48,7 +48,7 @@ export default {
       async goToProjectPage(projectId){
         try {
           await projectsService.getBacklog(projectId)
-          router.push({name: 'Project', params: {id: projectId}})
+          router.push({name: 'Project.Backlog', params: {id: projectId}})
         } catch (error) {
           logger.log('goToBackLog function', error.message)
           Pop.toast(error.message, "error")
