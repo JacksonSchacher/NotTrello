@@ -29,16 +29,24 @@
 </template>
 
 <script>
-import { onMounted } from '@vue/runtime-core'
-import { Sprint } from '../models/Sprint'
 import { sprintsService } from '../services/SprintsService'
-import { logger } from '../utils/Logger'
 import Pop from '../utils/Pop'
+import { useRoute } from 'vue-router'
 export default {
   props: {
     sprint: { type: Object, required: true }
   },
   setup() {
+    const route = useRoute()
+    return{
+      async deleteSprint(sprintId){
+        try {
+          await sprintsService.deleteSprint(route.params.id, sprintId)
+        } catch (error) {
+          Pop.toast(error.message, 'error')
+        }
+      }
+    }
   }
 }
 </script>
