@@ -1,13 +1,23 @@
 <template>
   <div class="container-fluid">
-    <div class="card bg-dark">
-      <div class="col-2">
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#BacklogItem-modal">
-          Create Backlog Item
-        </button>
-      </div>
-      <div class="backlog-item" v-for="b in backlogs" :key="b.id">
-        <BacklogItem :backlog="b" />
+    <div class="row">
+      <div class="col-8 m-auto">
+        <div class="card bg-dark">
+          <div class="row justify-content-between mx-2">
+            <div class="col-4 py-2 text-light">
+              <h4> Backlog Items</h4>
+              <p>Group Tasks into Backlog Items</p>
+            </div>
+            <div class="col-2 align-self-end py-2">
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#BacklogItem-modal">
+                Create Backlog Item
+              </button>
+            </div>
+          </div>
+          <div class="backlog-item" v-for="b in backlogs" :key="b.id">
+            <BacklogItem :backlog="b" />
+          </div>
+        </div>
       </div>
     </div>
 
@@ -23,17 +33,19 @@
 </template>
 
 <script>
-import { computed, onMounted } from '@vue/runtime-core'
+import { computed, onMounted, ref } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { useRoute } from 'vue-router'
 import { backlogService } from '../services/BacklogService'
 import Pop from '../utils/Pop'
+import { projectsService } from '../services/ProjectsService'
 export default {
   setup() {
     const route = useRoute()
     onMounted(async() => {
       try {
         await backlogService.getBacklogs(route.params.id)
+        await projectsService.getProjectById(route.params.id)
       } catch (error) {
         Pop.toast(error.message, 'error')
       }

@@ -10,5 +10,11 @@ class BacklogService {
     AppState.backlogs = res.data.map(b => new Backlog(b))
     logger.log('backlog', AppState.backlogs)
   }
+
+  async createBacklogItem(projectId, formData) {
+    const res = await api.post(`api/projects/${projectId}/backlog`, formData)
+    logger.log(res)
+    AppState.backlogs = [...AppState.backlogs, new Backlog(res.data)]
+  }
 }
 export const backlogService = new BacklogService()

@@ -41,10 +41,12 @@ import Pop from '../utils/Pop'
 import { projectsService } from '../services/ProjectsService'
 import { AppState } from '../AppState'
 import { router } from '../router'
+import { useRoute } from 'vue-router'
 
 export default {
   setup() {
     const editable = ref({})
+    const route = useRoute()
     watchEffect(() => {
       editable.value = {}
     })
@@ -56,12 +58,12 @@ export default {
         try {
           // editable.value.id
           // await projectsService.editProject(editable.value)
-          const newProject = await projectsService.createProject(editable.value)
+          const newProject = await projectsService.createProject(route.params.id, editable.value)
           router.push({ name: 'Project.Backlog', params: { id: newProject } })
           editable.value = {}
         } catch (error) {
           Pop.toast(error.message, 'error')
-          logger.log();
+          logger.log()
         }
       }
     }

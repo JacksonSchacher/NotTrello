@@ -14,7 +14,9 @@ class ProjectsService {
 
   async getProjectById(projectId) {
     const res = await api.get(`api/projects/${projectId}`)
-    AppState.projects = new Project(res.data)
+    AppState.currentProject = new Project(res.data)
+    logger.log('GetProjectId RES', res)
+    logger.log('GET Project By Id', AppState.currentProject)
   }
 
   async createProject(project) {

@@ -4,12 +4,12 @@ import { reactive } from 'vue'
 export const AppState = reactive({
   user: {},
   account: {},
-    /**@type {import('.model/Sprint.js').Sprint[]} */
+  /** @type {import('.model/Sprint.js').Sprint[]} */
   sprints: [],
-    /**@type {import('.model/Project.js').Project[]} */
+  /** @type {import('.model/Project.js').Project[]} */
   projects: [],
-  /**@type {import('.model/Backlog.js').Backlog[]} */
-  backlogs: [],
-  /**@type {import('.model/Sprint.js').Sprint[]} */
-  sprints: []
+  currentProject: null,
+  /** @type {import('.model/Backlog.js').Backlog[]} */
+  backlogs: []
+  /** @type {import('.model/Sprint.js').Sprint[]} */
 })
