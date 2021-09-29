@@ -33,6 +33,7 @@
     name="endDate"
     id="endDate"
     v-model="editable.endDate"
+    required
     >
 
     <br />
@@ -59,23 +60,28 @@ import { computed, watchEffect } from '@vue/runtime-core'
 import Pop from '../utils/Pop'
 import { sprintsService } from '../services/SprintsService'
 import { AppState } from '../AppState'
+import { useRoute } from 'vue-router'
+import { logger } from '../utils/Logger'
   export default {
     setup() {
+      const route = useRoute()
       const editable = ref({})
       watchEffect(() => {
         editable.value = {}
       })
       return {
+        route,
         editable,
         project: computed(() => AppState.projects),
         async submitSprintForm(){
           try {
             // editable.value.id
             // ? await sprintsService.editSprint(editable.value)
-            await sprintsService.createSprint(editable.value)
+            await sprintsService.createSprint(route.params.id, editable.value)
             editable.value = {}
           } catch (error) {
             Pop.toast(error.message, 'error')
+            logger.log('create sprint', error.message)
           }
         }
       }
