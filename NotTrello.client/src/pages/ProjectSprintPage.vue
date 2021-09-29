@@ -5,6 +5,7 @@
           Create New Sprint
         </button>
       <Sprint v-for="s in sprints" :key="s.id" :sprint="s" />
+      <div>{{sprints}}</div>
     </div>
   </div>
 

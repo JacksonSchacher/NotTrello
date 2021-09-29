@@ -9,6 +9,7 @@ async getSprints(projectId){
   const res = await api.get(`api/projects/${projectId}/sprints`)
   logger.log('getSprints', res)
   AppState.sprints = res.data.map(s => new Sprint(s))
+  logger.log('appstate sprints',AppState.sprints)
 }
 
 async getSprintsById(projectId, sprintId){
