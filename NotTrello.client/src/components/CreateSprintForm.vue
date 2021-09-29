@@ -75,7 +75,6 @@ import { logger } from '../utils/Logger'
         project: computed(() => AppState.projects),
         async submitSprintForm(){
           try {
-            debugger
             // editable.value.id
             // ? await sprintsService.editSprint(editable.value)
             await sprintsService.createSprint(route.params.id, editable.value)

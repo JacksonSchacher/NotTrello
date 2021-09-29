@@ -42,6 +42,7 @@ import { projectsService } from '../services/ProjectsService'
 import { AppState } from '../AppState'
 import { router } from '../router'
 import { useRoute } from 'vue-router'
+import { logger } from '../utils/Logger'
 
 export default {
   setup() {
@@ -63,7 +64,7 @@ export default {
           editable.value = {}
         } catch (error) {
           Pop.toast(error.message, 'error')
-          logger.log()
+          logger.log('submit project form ', error)
         }
       }
     }
