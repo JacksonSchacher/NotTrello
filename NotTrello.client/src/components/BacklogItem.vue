@@ -16,7 +16,7 @@
             <div>Sprints go here</div>
             <i class="mdi mdi-weight"></i>
             <button>Details</button>
-            <button ">
+            <button>
               Add Task
             </button>
             <h4>Tasks Completed</h4>
