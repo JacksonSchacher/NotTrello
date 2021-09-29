@@ -1,8 +1,8 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid bg-color">
     <div class="row">
       <div class="col-8 m-auto">
-        <div class="card bg-dark">
+        <div class="card shadow">
           <div class="row justify-content-between mx-2">
             <div class="col-4 py-2 text-light">
               <h4>{{ currentProject.name }} Sprints</h4>
@@ -63,6 +63,13 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped lang="scss">
+.card{
+  background-color: rgba(0, 0, 0, 0.616);
+  color: white;
+  backdrop-filter: blur(4px);
+}
+.bg-color{
+background-color: linear-gradient(90deg, hsla(236, 82%, 85%, 1) 0%, hsla(186, 100%, 69%, 1) 100%);
+}
 </style>
