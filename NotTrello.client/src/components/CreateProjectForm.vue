@@ -41,8 +41,6 @@ import Pop from '../utils/Pop'
 import { projectsService } from '../services/ProjectsService'
 import { AppState } from '../AppState'
 import { router } from '../router'
-import { Project } from '../models/Project'
-import { logger } from '../utils/Logger'
 
 export default {
   setup() {
@@ -56,19 +54,17 @@ export default {
       editable,
       async submitProjectForm() {
         try {
-          debugger
-          editable.value.id
+          // editable.value.id
           // await projectsService.editProject(editable.value)
           const newProject = await projectsService.createProject(editable.value)
-          router.push({name: 'Project', params: {id: newProject}})
+          router.push({ name: 'Project', params: { id: newProject } })
           editable.value = {}
         } catch (error) {
           Pop.toast(error.message, 'error')
         }
       }
+    }
   }
-
-}
 }
 </script>
 
