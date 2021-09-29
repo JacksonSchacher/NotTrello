@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid bg-color">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-8 m-auto">
         <div class="card shadow">
@@ -69,7 +69,5 @@ export default {
   color: white;
   backdrop-filter: blur(4px);
 }
-.bg-color{
-background-color: linear-gradient(90deg, hsla(236, 82%, 85%, 1) 0%, hsla(186, 100%, 69%, 1) 100%);
-}
+
 </style>
