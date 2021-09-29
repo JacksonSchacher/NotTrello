@@ -21,10 +21,21 @@
 </template>
 
 <script>
-import { computed } from '@vue/runtime-core'
+import { computed, onMounted } from '@vue/runtime-core'
 import { AppState } from '../AppState'
+import { useRoute } from 'vue-router'
+import { backlogService } from '../services/BacklogService'
+import Pop from '../utils/Pop'
 export default {
   setup() {
+    const route = useRoute()
+    onMounted(async() => {
+      try {
+        await backlogService.getBacklogs(route.params.id)
+      } catch (error) {
+        Pop.toast(error.message, 'error')
+      }
+    })
     return {
       backlogs: computed(() => AppState.backlogs)
     }

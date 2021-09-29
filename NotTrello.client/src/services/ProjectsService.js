@@ -36,12 +36,5 @@ class ProjectsService {
     logger.log('delete project in service', res)
     AppState.projects = AppState.projects.filter(p => p.id !== projectId)
   }
-
-  async getBacklog(projectId) {
-    const res = await api.get(`api/projects/${projectId}/backlog`)
-    logger.log('backlog res', res)
-    AppState.backlogs = res.data.map(b => new Backlog(b))
-    logger.log('backlog', AppState.backlogs)
-  }
 }
 export const projectsService = new ProjectsService()
