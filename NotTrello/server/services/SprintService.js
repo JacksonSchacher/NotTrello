@@ -4,9 +4,6 @@ import { BadRequest, Forbidden } from '../utils/Errors'
 class SprintService {
   async getSprints(query) {
     const sprints = await dbContext.Sprint.find(query).populate('creator', 'name picture')
-    if (!sprints) {
-      throw new BadRequest('No Sprints Found')
-    }
     return sprints
   }
 

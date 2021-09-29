@@ -9,14 +9,14 @@
     </div>
   </div>
 
-    <Modal id="Sprint-modal">
-      <template #modal-title>
-        Add Sprint
-      </template>
-      <template #modal-body>
-        <CreateSprintForm />
-      </template>
-    </Modal>
+  <Modal id="Sprint-modal">
+    <template #modal-title>
+      Add Sprint
+    </template>
+    <template #modal-body>
+      <CreateSprintForm />
+    </template>
+  </Modal>
 </template>
 
 <script>
@@ -42,7 +42,7 @@ export default {
     })
     return {
       route,
-      sprints: computed(() => AppState.sprints),
+      sprints: computed(() => AppState.sprints)
       // project: computed(() => AppState.projects)
     }
   }

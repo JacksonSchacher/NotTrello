@@ -5,8 +5,8 @@
         <div class="card bg-dark">
           <div class="row justify-content-between mx-2">
             <div class="col-4 py-2 text-light">
-              <h4> Backlog Items</h4>
-              <p>Group Tasks into Backlog Items</p>
+              <h4>{{ currentProject.name }} Backlog Items</h4>
+              <p>{{ currentProject.description }}</p>
             </div>
             <div class="col-2 align-self-end py-2">
               <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#BacklogItem-modal">
@@ -51,7 +51,8 @@ export default {
       }
     })
     return {
-      backlogs: computed(() => AppState.backlogs)
+      backlogs: computed(() => AppState.backlogs),
+      currentProject: computed(() => AppState.currentProject)
     }
   }
 }

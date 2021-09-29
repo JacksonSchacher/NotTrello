@@ -5,26 +5,17 @@
 </template>
 
 <script>
+import { onMounted } from '@vue/runtime-core'
 import { Sprint } from '../models/Sprint'
 import { sprintsService } from '../services/SprintsService'
 import { logger } from '../utils/Logger'
 import Pop from '../utils/Pop'
 export default {
-props: {
-  sprint: { type: Sprint, required: true }
-},
-setup(props) {
-  return{
-    async getSprints(projectId){
-      try {
-        await sprintsService.getSprints(projectId)
-      } catch (error) {
-        logger.log('getSprints logger', error)
-        Pop.toast(error.message, 'error')
-      }
-    }
+  props: {
+    sprint: { type: Sprint, required: true }
+  },
+  setup() {
   }
-}
 }
 </script>
 
