@@ -2,10 +2,10 @@
   <div class="container-fluid">
     <div class="row py-2 mt-2">
     <div class="col-10 offset-1">
-  <div class="card px-4 m-5">
+  <div class="card shadow px-4 m-5">
   <div class="row justify-content-between my-4 mx-5">
-    <div class="col-2">
-      <h4 class="text-center"> Projects </h4>
+    <div class="col-3">
+      <h4 class="mt-2 project"> Projects </h4>
     </div>
     <div class="col-2">
      <button class="btn projectButton" data-bs-toggle="modal" data-bs-target="#createProject-modal">
@@ -13,7 +13,7 @@
       </button>
     </div>
     </div>
-    <div class="card-header bg-white">
+    <div class="card-header">
       <div class="row justify-content-between mx-5">
     <div class="col-2">
       <h6>Name:</h6>
@@ -75,7 +75,25 @@ export default {
 
 <style scoped lang="scss">
 .projectButton{
-  border: solid #10a1b1;
-  color: #10a1b1;
+  border: solid #BABEF8;
+  color: white;  
+}
+.projectButton:hover{
+  border: solid #29ADF8;
+  background-color: rgba(0, 0, 0, 0.192);
+  color: white;
+}
+.card{
+backdrop-filter: blur(4px);
+background-color: rgba(0, 0, 0, 0.616);
+color: white;
+}
+.card-header{
+background-color: rgba(255, 255, 255, 0);
+color: white;
+}
+.project{
+  text-shadow: 2px 2px 4px #000000;
+  font-size: 45px;
 }
 </style>
