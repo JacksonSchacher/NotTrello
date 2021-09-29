@@ -16,12 +16,12 @@ async getSprintsById(projectId, sprintId){
   const res = await api.get(`api/projects/${projectId}/sprints/${sprintId}`)
   AppState.sprints = new Sprint(res.data)
 }
-async createSprints(projectId, sprint){
+async createSprint(projectId, sprint){
 const res = await api.post(`api/projects/${projectId}/sprints`, sprint)
 AppState.sprints.push(new Sprint(res.data))
 logger.log('create sprints', res)
 }
-async editSprints(projectId, sprint){
+async editSprint(projectId, sprint){
   const res = await api.put(`api/projects/${projectId}/sprints/${sprint.id}`, sprint)
   AppState.sprints = new Sprint(res.data)
   logger.log('edit sprints', res)

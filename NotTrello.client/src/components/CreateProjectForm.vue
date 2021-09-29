@@ -61,6 +61,7 @@ export default {
           editable.value = {}
         } catch (error) {
           Pop.toast(error.message, 'error')
+          logger.log();
         }
       }
     }

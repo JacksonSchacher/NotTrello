@@ -19,7 +19,7 @@ setup(props) {
       try {
         await sprintsService.getSprints(projectId)
       } catch (error) {
-        logger.log('getSprints logger', error.message)
+        logger.log('getSprints logger', error)
         Pop.toast(error.message, 'error')
       }
     }

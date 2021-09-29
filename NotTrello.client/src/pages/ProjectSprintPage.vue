@@ -1,9 +1,21 @@
 <template>
   <div class="container-fluid">
     <div class="row">
+       <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Sprint-modal">
+          Create New Sprint
+        </button>
       <Sprint v-for="s in sprints" :key="s.id" :sprint="s" />
     </div>
   </div>
+
+    <Modal id="Sprint-modal">
+      <template #modal-title>
+        Add Sprint
+      </template>
+      <template #modal-body>
+        <CreateSprintForm />
+      </template>
+    </Modal>
 </template>
 
 <script>
