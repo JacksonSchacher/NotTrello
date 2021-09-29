@@ -8,7 +8,7 @@ export const AppState = reactive({
   sprints: [],
   /** @type {import('.model/Project.js').Project[]} */
   projects: [],
-  currentProject: null,
+  currentProject: {},
   /** @type {import('.model/Backlog.js').Backlog[]} */
   backlogs: []
   /** @type {import('.model/Sprint.js').Sprint[]} */

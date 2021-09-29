@@ -1,21 +1,23 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-       <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Sprint-modal">
-          Create New Sprint
-        </button>
-      <Sprint v-for="s in sprints" :key="s.id" :sprint="s" />
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Sprint-modal">
+        Create New Sprint
+      </button>
+      <div v-for="s in sprints" :key="s.id">
+        <Sprint :sprint="s" />
+      </div>
     </div>
   </div>
 
-    <Modal id="Sprint-modal">
-      <template #modal-title>
-        Add Sprint
-      </template>
-      <template #modal-body>
-        <CreateSprintForm />
-      </template>
-    </Modal>
+  <Modal id="Sprint-modal">
+    <template #modal-title>
+      Add Sprint
+    </template>
+    <template #modal-body>
+      <CreateSprintForm />
+    </template>
+  </Modal>
 </template>
 
 <script>
@@ -41,7 +43,7 @@ export default {
     })
     return {
       route,
-      sprints: computed(() => AppState.sprints),
+      sprints: computed(() => AppState.sprints)
       // project: computed(() => AppState.projects)
     }
   }
