@@ -20,6 +20,7 @@ class BacklogService {
   async deleteBacklogItem(projectId, backlogId) {
     const res = await api.delete(`api/projects/${projectId}/backlog/${backlogId}`)
     logger.log('Deleted Backlog Item', res)
+    AppState.backlogs = AppState.backlogs.filter(b => b.id !== backlogId)
   }
 }
 export const backlogService = new BacklogService()

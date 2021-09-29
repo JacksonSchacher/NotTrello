@@ -16,7 +16,9 @@
             <div>Sprints go here</div>
             <i class="mdi mdi-weight"></i>
             <button>Details</button>
-            <button>Add Task</button>
+            <button ">
+              Add Task
+            </button>
             <h4>Tasks Completed</h4>
           </button>
         </div>
@@ -26,7 +28,9 @@
       </div>
       <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
         <div class="accordion-body">
-          Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.
+          <div v-for="t in tasks" :key="t.id">
+            <Task :task="t" />
+          </div>
         </div>
       </div>
     </div>
@@ -34,10 +38,13 @@
 </template>
 
 <script>
+import { computed } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { Backlog } from '../models/Backlog'
 import { backlogService } from '../services/BacklogService'
+import { taskService } from '../services/TaskService'
 import Pop from '../utils/Pop'
+import { AppState } from '../AppState'
 export default {
   props: {
     backlog: { type: Backlog, required: true }
@@ -45,9 +52,17 @@ export default {
   setup() {
     const route = useRoute()
     return {
+      tasks: computed(() => AppState.tasks),
       async deleteBacklogItem(backlogId) {
         try {
           await backlogService.deleteBacklogItem(route.params.id, backlogId)
+        } catch (error) {
+          Pop.toast(error.message, 'error')
+        }
+      },
+      async addTask(backlogId) {
+        try {
+          await taskService.createTask(route.params.id, backlogId)
         } catch (error) {
           Pop.toast(error.message, 'error')
         }
