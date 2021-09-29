@@ -59,7 +59,7 @@ export default {
         try {
           // editable.value.id
           // await projectsService.editProject(editable.value)
-          const newProject = await projectsService.createProject(route.params.id, editable.value)
+          const newProject = await projectsService.createProject(editable.value)
           router.push({ name: 'Project.Backlog', params: { id: newProject } })
           editable.value = {}
         } catch (error) {
