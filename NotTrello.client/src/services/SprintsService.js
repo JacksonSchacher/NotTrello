@@ -29,7 +29,7 @@ class SprintsService {
   }
 
   async deleteSprint(projectId, sprintId) {
-    const res = await api.delete(`api/projects/${projectId}/sprints/${sprint.id}`)
+    const res = await api.delete(`api/projects/${projectId}/sprints/${sprintId}`)
     AppState.sprints = AppState.sprints.filter(s => s.id !== sprintId)
   }
 }
