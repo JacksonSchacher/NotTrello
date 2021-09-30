@@ -7,7 +7,7 @@
             <h4> {{ sprint.name }}</h4>
             <p>Sprint Start Date: {{ new Date(sprint.startDate).toLocaleDateString() }}</p>
             <p>Sprint End Date: {{ new Date(sprint.endDate).toLocaleDateString() }}</p>
-            
+
           </div>
            <div class="col-2 text-white" v-if="account.id == sprint.creatorId"> 
             <i class="mdi mdi-delete f-20 selectable" @click="deleteSprint(sprint.id)"></i>
@@ -49,7 +49,7 @@ export default {
     return {
       account: computed(() => AppState.account),
       currentProject: computed(() => AppState.currentProject),
-      backlogs: computed(() => AppState.backlogs.filter(b => b.blackItemId === AppState.currentSprint.id)),
+      backlogs: computed(() => AppState.backlogs.filter(b => b.sprintId === AppState.currentSprint.id)),
       async deleteSprint(sprintId) {
         try {
           const yes = await Pop.confirm('Are you sure you want to delete?')
