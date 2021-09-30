@@ -63,7 +63,7 @@
   </Modal>
   <Modal id="backlogDetails-modal">
     <template #modal-title>
-      {{ backlog.name }} Details <i v-if="account.id == backlog.creatorId" class="mdi mdi-pencil selectable"></i>
+      {{ backlog.name }} Details <i v-if="account.id == backlog.creatorId" class="mdi mdi-pencil selectable" @click="editDetails(backlog.edit)"></i>
     </template>
     <template #modal-body>
       <BacklogDetails />
@@ -78,6 +78,7 @@ import { Backlog } from '../models/Backlog'
 import { backlogService } from '../services/BacklogService'
 import Pop from '../utils/Pop'
 import { AppState } from '../AppState'
+import { logger } from '../utils/Logger'
 export default {
   props: {
     backlog: { type: Backlog, required: true }
@@ -100,6 +101,14 @@ export default {
         } catch (error) {
           Pop.toast(error.message, 'error')
         }
+      },
+      editDetails(backlogEditable) {
+        if (backlogEditable) {
+          AppState.currentBacklog.edit = false
+        } else {
+          AppState.currentBacklog.edit = true
+        }
+        logger.log('Edit Details', props.backlog.edit)
       }
     }
   }
