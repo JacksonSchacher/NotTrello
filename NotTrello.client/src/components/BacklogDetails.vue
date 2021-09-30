@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid w-100">
-    <div v-if="backlog.edit">
+    <div v-if="currentBacklog.edit">
       <form @submit.prevent="editDetails()">
         <div class="my-2">
           <label class="form-label" for="name">Update Backlog Item Name</label>
@@ -16,17 +16,23 @@
             >
           </div>
         </div>
-        <label class="form-label" for="sprint">Sprint</label>
-        <div class="dropdown">
+        <label for="sprintId">Assign to Sprint: </label>
+        <select v-model="editable.sprintId" id="sprintId" name="sprintId">
+          <option v-for="s in sprints" :key="s.id" :value="s.id">
+            {{ s.name }}
+          </option>
+        </select>
+
+        <!-- <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             Assign to Sprint
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li class="selectable" v-for="s in sprints" :key="s.id" @click="editable.sprintId">
+            <li class="selectable" v-for="s in sprints" :key="s.id" @change="editable.sprintId">
               {{ s.name }}
             </li>
           </ul>
-        </div>
+        </div> -->
         <div class="row">
           <label for="status">
             Status
@@ -106,14 +112,20 @@ import Pop from '../utils/Pop'
 import { backlogService } from '../services/BacklogService'
 import { AppState } from '../AppState'
 import { computed, watchEffect } from '@vue/runtime-core'
-import { logger } from '../utils/Logger'
+import { Backlog } from '../models/Backlog'
 export default {
-  setup() {
+  props: {
+    backlog: { type: Backlog, default: () => new Backlog() }
+  },
+  setup(props) {
     const route = useRoute()
     const editable = ref({})
+    watchEffect(() => {
+      editable.value = { ...props.backlog }
+    })
     return {
+      currentBacklog: computed(() => AppState.currentBacklog),
       sprints: computed(() => AppState.sprints.filter(s => s.projectId === AppState.currentProject.id)),
-      backlog: computed(() => AppState.currentBacklog),
       notes: computed(() => AppState.notes.filter(n => n.backlogItemId === AppState.currentBacklog.id)),
       editable,
       async addNote() {
