@@ -34,8 +34,9 @@
         </div>
       </form>
     </div>
-    <div class="row">
-      <div class="col-10" v-for="n in notes" :key="n.id">
+
+    <div class="row justify-content-center">
+      <div class="d-flex align-items-center" v-for="n in notes" :key="n.id">
         <Notes :note="n" />
       </div>
     </div>
@@ -65,6 +66,7 @@ export default {
           Pop.toast(error.message, 'error')
         }
       }
+
     }
   }
 }

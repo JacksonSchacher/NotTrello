@@ -34,5 +34,17 @@ class BacklogService {
     logger.log('Added Note', res)
     AppState.notes = [...AppState.notes, new Notes(res.data)]
   }
+
+  async getNotes(projectId) {
+    const res = await api.get(`api/projects/${projectId}/notes`)
+    logger.log('Got Notes', res)
+    AppState.notes = res.data.map(n => new Notes(n))
+  }
+
+  async deleteNote(projectId, noteId) {
+    const res = await api.delete(`api/projects/${projectId}/notes/${noteId}`)
+    logger.log('Deleted Note', res)
+    AppState.notes = AppState.notes.filter(n => n.id !== noteId)
+  }
 }
 export const backlogService = new BacklogService()

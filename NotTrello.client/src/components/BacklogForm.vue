@@ -9,7 +9,6 @@
              name="status"
              id="pending"
              value="pending"
-
              checked
              v-model="editable.status"
       >
@@ -20,7 +19,6 @@
              name="status"
              id="in-progress"
              value="in-progress"
-
              v-model="editable.status"
       >
       <label class="btn btn-outline-primary" for="in-progress">In-Progress</label>
@@ -30,7 +28,6 @@
              name="status"
              id="review"
              value="review"
-
              v-model="editable.status"
       >
       <label class="btn btn-outline-primary" for="review">Review</label>
@@ -39,7 +36,6 @@
              name="status"
              id="done"
              value="done"
-
              v-model="editable.status"
       >
       <label class="btn btn-outline-primary" for="done">Done</label>
@@ -74,7 +70,6 @@
                class="btn-check"
                name="status"
                id="dark"
-               autocomplete="off"
                v-model="editable.color"
         >
         <label class="btn btn-color" for="dark">Dark</label>
@@ -82,9 +77,8 @@
         <input type="radio"
                class="btn-check"
                name="color"
-               id="dark"
-               value="dark"
-               autocomplete="off"
+               id="status"
+               value="red"
                v-model="editable.color"
         >
         <label class="btn btn-color" for="red">Red</label>
@@ -93,7 +87,6 @@
                class="btn-check"
                name="color"
                id="red"
-               autocomplete="off"
                v-model="editable.color"
         >
         <label class="btn btn-color" for="orange">Orange</label>
@@ -101,7 +94,6 @@
                class="btn-check"
                name="color"
                id="orange"
-               autocomplete="off"
                v-model="editable.color"
         >
         <label class="btn btn-color" for="yellow">Yellow</label>
@@ -109,7 +101,6 @@
                class="btn-check"
                name="color"
                id="yellow"
-               autocomplete="off"
                v-model="editable.color"
         >
         <label class="btn btn-color" for="green">Green</label>
@@ -117,7 +108,6 @@
                class="btn-check"
                name="color"
                id="green"
-               autocomplete="off"
                v-model="editable.color"
         >
         <label class="btn btn-color" for="blue">Blue</label>
@@ -125,7 +115,6 @@
                class="btn-check"
                name="color"
                id="blue"
-               autocomplete="off"
                v-model="editable.color"
         >
         <label class="btn btn-color" for="purple">Purple</label>
@@ -133,7 +122,6 @@
                class="btn-check"
                name="color"
                id="purple"
-               autocomplete="off"
                v-model="editable.color"
         >
         <label class="btn btn-color" for="light">Light</label>
@@ -141,7 +129,6 @@
                class="btn-check"
                name="color"
                id="light"
-               autocomplete="off"
                v-model="editable.color"
         >
       </div>

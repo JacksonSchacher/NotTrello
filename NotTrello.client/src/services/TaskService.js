@@ -9,5 +9,11 @@ class TaskService {
     logger.log('createTask', res)
     AppState.tasks = [...AppState.tasks, new Task(res.data)]
   }
+
+  async getTasks(projectId) {
+    const res = await api.get(`api/projects/${projectId}/tasks`)
+    logger.log('Got Tasks', res)
+    AppState.tasks = res.data.map(t => new Task(t))
+  }
 }
 export const taskService = new TaskService()
