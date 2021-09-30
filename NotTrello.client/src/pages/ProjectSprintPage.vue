@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-<Sprint />
+    <Sprint :sprint="sprint" />
   </div>
 </template>
 
@@ -26,6 +26,7 @@ export default {
     })
     return {
       route,
+      sprint: computed(() => AppState.currentSprint),
       sprints: computed(() => AppState.sprints),
       currentProject: computed(() => AppState.currentProject)
     }
@@ -44,7 +45,7 @@ export default {
 }
 .create-button{
    border: solid #BABEF8;
-  color: white;  
+  color: white;
 }
 .create-button:hover{
   border: solid #29ADF8;

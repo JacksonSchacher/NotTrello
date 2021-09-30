@@ -11,13 +11,8 @@ class SprintsService {
     logger.log('appstate sprints', AppState.sprints)
   }
 
-  async getSprintById(projectId, sprintId){
-  const res = await api.get(`api/projects/${projectId}/sprints/${sprintId}`)
-  AppState.sprints = new Sprint(res.data)
-  }
-
-  async getCurrentSprint(sprintId) {
-    AppState.currentSprints = AppState.sprints.find( s => s.id === sprintId)
+  async setSprint(sprintId) {
+    AppState.currentSprint = AppState.sprints.find(s => s.id === sprintId)
     logger.log('current sprint', AppState.currentSprints)
   }
 

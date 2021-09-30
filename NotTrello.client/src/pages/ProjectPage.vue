@@ -2,38 +2,35 @@
   <div class="container-fluid mb-3">
     <div class="row pt-2 top-bar" style="background-color: rgba(0, 0, 0, 0.616);">
       <ul class="nav nav-links d-flex align-items-center justify-content-around">
-         <p class="text-light mt-2">
-      <b>
-      {{ currentProject.name }}
-      </b>
-      <i class="mdi mdi-delete f-15 selectable ms-2" @click="deleteProject(currentProject.id)"></i>
-      </p>
+        <p class="text-light mt-2">
+          <b>
+            {{ currentProject.name }}
+          </b>
+          <i class="mdi mdi-delete f-15 selectable ms-2" @click="deleteProject(currentProject.id)"></i>
+        </p>
 
-          
         <router-link :to="{name:'Project.Backlog'}">
           <li class="nav-link">
             Backlog
           </li>
         </router-link>
-          
 
-          <div v-for="s in sprints" :key="s.id" :sprint="s" >
-        <router-link :to="{name:'Project.Sprint'}">
-           <li class="nav-link">
-             {{ s.name }}
-           </li>
-        </router-link>
-          </div>
+        <div v-for="s in sprints" :key="s.id" :sprint="s">
+          <router-link :to="{name:'Project.Sprint'}">
+            <li class="nav-link" @click="setSprint(s.id)">
+              {{ s.name }}
+            </li>
+          </router-link>
+        </div>
 
-          <button class="btn create-button" data-bs-toggle="modal" data-bs-target="#Sprint-modal">
-                 New Sprint +
-              </button>
-
+        <button class="btn create-button" data-bs-toggle="modal" data-bs-target="#Sprint-modal">
+          New Sprint +
+        </button>
       </ul>
     </div>
   </div>
 
-    <Modal id="Sprint-modal">
+  <Modal id="Sprint-modal">
     <template #modal-title>
       Add Sprint
     </template>
@@ -57,7 +54,7 @@ import { sprintsService } from '../services/SprintsService'
 export default {
   setup() {
     const route = useRoute()
-    onMounted(async () => {
+    onMounted(async() => {
       try {
         await sprintsService.getSprints(route.params.id)
         await projectsService.getProjectById(route.params.id)
@@ -72,7 +69,7 @@ export default {
       backlog: computed(() => AppState.backlogs),
       sprints: computed(() => AppState.sprints),
       currentProject: computed(() => AppState.currentProject),
-       async deleteProject(currentProjectId) {
+      async deleteProject(currentProjectId) {
         try {
           const yes = await Pop.confirm('Are you sure you want to delete?')
           if (!yes) { return }
@@ -80,6 +77,14 @@ export default {
           router.push({ name: 'Home' })
         } catch (error) {
           logger.log('delteProject in Project.vue', error.message)
+          Pop.toast(error.message, 'error')
+        }
+      },
+      async setSprint(sprintId) {
+        try {
+          await sprintsService.setSprint(sprintId)
+          logger.log('Set Sprint', AppState.currentSprint)
+        } catch (error) {
           Pop.toast(error.message, 'error')
         }
       }
@@ -102,7 +107,7 @@ export default {
   cursor: pointer;
 }
 .create-button{
-  color: white;  
+  color: white;
 }
 .create-button:hover{
   background-color: rgba(0, 0, 0, 0.192);
