@@ -31,7 +31,7 @@ export default {
     const route = useRoute()
     return {
       currentProject: computed(() => AppState.currentProject),
-      backlogs: computed(() => AppState.backlogs.filter(b => b.blackItemId === AppState.currentSprints.id)),
+      backlogs: computed(() => AppState.backlogs.filter(b => b.blackItemId === AppState.currentSprint.id)),
       async deleteSprint(sprintId) {
         try {
           await sprintsService.deleteSprint(route.params.id, sprintId)
