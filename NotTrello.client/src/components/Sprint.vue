@@ -38,14 +38,6 @@ export default {
         } catch (error) {
           Pop.toast(error.message, 'error')
         }
-      },
-      async getCurrentSprint(sprintId) {
-        try {
-          await sprintsService.getCurrentSprint(sprintId)
-        } catch (error) {
-          Pop.toast(error.message, 'error')
-          logger.log('current spring', sprintId)
-        }
       }
     }
   }
