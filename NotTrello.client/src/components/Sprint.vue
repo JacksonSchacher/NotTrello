@@ -1,43 +1,39 @@
 <template>
-  <div class="accordion accordion-flush" id="accordionFlushExample">
-    <div class="accordion-item">
-      <div class="row">
-        <div class="accordion-header col-11" id="flush-headingOne">
-          <button class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  :data-bs-target="'#sprint-' + sprint.id"
-                  aria-expanded="true"
-                  aria-controls="flush-collapseOne"
-          >
-            <i class="mdi mdi-folder f-24 mb-2"></i>
-
-            <h4>{{ sprint.name }}</h4>
-          </button>
-        </div>
-        <div class="d-flex col-1 align-items-center text-dark">
-          <i class="mdi mdi-delete f-24 selectable" @click="deleteSprint(sprint.id)"></i>
-        </div>
-      </div>
-      <div :id="'sprint-'+sprint.id" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-        <div class="accordion-body">
+    <div class="row">
+      <div class="col-8 m-auto">
+        <div class="card shadow">
+          <div class="row justify-content-between mx-2">
+            <div class="col-4 py-2 project">
+              <h4>{{ currentProject.name }}</h4>
+              <p>{{ currentProject.description }}</p>
+              <p> {{ sprint.name }}</p>
+            </div>
+            <div class="col-2 align-self-end py-2">
+            </div>
+          </div>
+        
+          <BacklogItem v-for="b in backlogs" :key="b.id" :backlog="b"/>
         </div>
       </div>
     </div>
-  </div>
+
+
+
 </template>
 
 <script>
 import { sprintsService } from '../services/SprintsService'
 import Pop from '../utils/Pop'
 import { useRoute } from 'vue-router'
+import { AppState } from '../AppState'
+import { computed } from '@vue/runtime-core'
 export default {
-  props: {
-    sprint: { type: Object, required: true }
-  },
   setup() {
     const route = useRoute()
     return {
+    sprint: computed(() => AppState.sprints),
+    currentProject: computed(()=> AppState.currentProject),
+    backlogs: computed(() => AppState.backlogs),
       async deleteSprint(sprintId) {
         try {
           await sprintsService.deleteSprint(route.params.id, sprintId)

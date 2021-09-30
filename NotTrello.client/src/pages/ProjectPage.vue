@@ -10,7 +10,7 @@
       </p>
 
           
-        <router-link :to="{name:'Project.Backlog'}" exact-active-class="IS-ACTIVATED">
+        <router-link :to="{name:'Project.Backlog'}">
           <li class="nav-link">
             Backlog
           </li>
@@ -18,16 +18,29 @@
           
 
           <div v-for="s in sprints" :key="s.id" :sprint="s" >
-        <router-link :to="{name:'Project.Sprint'}" exact-active-class="IS-ACTIVATED">
+        <router-link :to="{name:'Project.Sprint'}">
            <li class="nav-link">
              {{ s.name }}
            </li>
         </router-link>
           </div>
 
+          <button class="btn create-button" data-bs-toggle="modal" data-bs-target="#Sprint-modal">
+                 New Sprint +
+              </button>
+
       </ul>
     </div>
   </div>
+
+    <Modal id="Sprint-modal">
+    <template #modal-title>
+      Add Sprint
+    </template>
+    <template #modal-body>
+      <CreateSprintForm />
+    </template>
+  </Modal>
   <router-view />
 </template>
 
@@ -79,10 +92,20 @@ export default {
 .nav-link{
   text-transform: uppercase;
 }
- .navbar-nav .router-link-exact-active{
-   color: pink;
+ .nav-links .router-link-exact-active{
+  background-color: white;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  padding-bottom: 7px;
  }
  .hoverable {
   cursor: pointer;
+}
+.create-button{
+  color: white;  
+}
+.create-button:hover{
+  background-color: rgba(0, 0, 0, 0.192);
+  color: white;
 }
 </style>
