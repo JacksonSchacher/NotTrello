@@ -22,6 +22,11 @@ class BacklogService {
     AppState.backlogs = [...AppState.backlogs, new Backlog(res.data)]
   }
 
+  async editDetails(projectId, backlogId, detailsData) {
+    const res = await api.put(`api/projects/${projectId}/backlog/${backlogId}`, detailsData)
+    logger.log('Edit Details', res.data)
+  }
+
   async deleteBacklogItem(projectId, backlogId) {
     const res = await api.delete(`api/projects/${projectId}/backlog/${backlogId}`)
     logger.log('Deleted Backlog Item', res)

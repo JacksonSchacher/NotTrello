@@ -22,7 +22,7 @@
             Assign to Sprint
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li class="selectable" v-for="s in sprints" :key="s.id" @click="assignSprint(s.id)">
+            <li class="selectable" v-for="s in sprints" :key="s.id" @click="editable.sprintId">
               {{ s.name }}
             </li>
           </ul>
@@ -31,16 +31,16 @@
           <label for="status">
             Status
           </label>
-          <button type="button" class="btn btn-outline-dark">
+          <button type="button" class="btn btn-outline-dark" v-bind="editable.status" value="pending">
             Pending
           </button>
-          <button type="button" class="btn btn-outline-dark">
+          <button type="button" class="btn btn-outline-dark" v-bind="editable.status" value="in-progress">
             In-Progress
           </button>
-          <button type="button" class="btn btn-outline-dark">
+          <button type="button" class="btn btn-outline-dark" v-bind="editable.status" value="review">
             Review
           </button>
-          <button type="button" class="btn btn-outline-dark">
+          <button type="button" class="btn btn-outline-dark" v-bind="editable.status" value="done">
             Done
           </button>
         </div>
@@ -105,12 +105,12 @@ import { useRoute } from 'vue-router'
 import Pop from '../utils/Pop'
 import { backlogService } from '../services/BacklogService'
 import { AppState } from '../AppState'
-import { computed } from '@vue/runtime-core'
+import { computed, watchEffect } from '@vue/runtime-core'
 import { logger } from '../utils/Logger'
 export default {
   setup() {
-    const editable = ref({})
     const route = useRoute()
+    const editable = ref({})
     return {
       sprints: computed(() => AppState.sprints.filter(s => s.projectId === AppState.currentProject.id)),
       backlog: computed(() => AppState.currentBacklog),
@@ -125,11 +125,13 @@ export default {
           Pop.toast(error.message, 'error')
         }
       },
-      assignSprint(sprintId) {
-        editable.value.sprintId = sprintId
-        logger.log('Sprint value', editable.value.sprintId)
+      async editDetails() {
+        try {
+          await backlogService.editDetails(route.params.id, AppState.currentBacklog.id, editable.value)
+        } catch (error) {
+          Pop.toast(error.message, 'error')
+        }
       }
-
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="row py-2 justify-content-between">
     <div class="col-4 d-flex align-items-center">
-      <input type="checkbox">
+      <input @change="checked()" v-model="editable.isComplete" type="checkbox">
       <h5 class="ms-3">
         {{ task.name }}
       </h5>
@@ -17,21 +17,35 @@
 </template>
 
 <script>
+import { ref } from '@vue/reactivity'
 import { useRoute } from 'vue-router'
 import { Task } from '../models/Task'
 import { taskService } from '../services/TaskService'
 import Pop from '../utils/Pop'
+import { watchEffect } from '@vue/runtime-core'
 export default {
   props: {
     task: { type: Task, required: true }
   },
-  setup() {
+  setup(props) {
     const route = useRoute()
+    const editable = ref({})
+    watchEffect(() => {
+      editable.value = props.task
+    })
     return {
+      editable,
       async deleteTask(taskId) {
         try {
           await taskService.deleteTask(route.params.id, taskId)
           Pop.toast('Deleted Task', 'success')
+        } catch (error) {
+          Pop.toast(error.message, 'error')
+        }
+      },
+      async checked(taskId, isComplete) {
+        try {
+          await taskService.checkTask(route.params.id, props.task.id, editable.value)
         } catch (error) {
           Pop.toast(error.message, 'error')
         }

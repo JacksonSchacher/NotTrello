@@ -33,6 +33,12 @@ class TaskService {
     this.setWeight()
   }
 
+  async checkTask(projectId, taskId, taskData) {
+    const res = await api.put(`api/projects/${projectId}/tasks/${taskId}`, taskData)
+    logger.log('if checkbox', res.data)
+    logger.log('taskData', taskData)
+  }
+
   async deleteTask(projectId, taskId) {
     const res = await api.delete(`api/projects/${projectId}/tasks/${taskId}`)
     logger.log('Deleted Task', res)
