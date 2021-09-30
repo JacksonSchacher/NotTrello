@@ -21,7 +21,7 @@
               <button class="mx-3"
                       data-bs-toggle="modal"
                       data-bs-target="#backlogDetails-modal"
-                      @click="backlogDetails(backlog.id)"
+                      @click="getCurrentBacklogId(backlog.id)"
               >
                 Details
               </button>
@@ -29,7 +29,7 @@
             <div>
               <button data-bs-toggle="modal"
                       data-bs-target="#Task-modal"
-                      @click="addTask(backlog.id)"
+                      @click="getCurrentBacklogId(backlog.id)"
               >
                 Add Task
               </button>
@@ -40,8 +40,7 @@
           </button>
         </div>
         <div class="d-flex col-1 align-items-center text-dark">
-          <i class="mdi mdi-delete f-24 selectable"></i>
-          <!-- @click="deleteBacklogItem(backlog.id)" -->
+          <i class="mdi mdi-delete f-24 selectable" @click="deleteBacklogItem(backlog.id)"></i>
         </div>
       </div>
 
@@ -67,7 +66,7 @@
       {{ backlog.name }} Details
     </template>
     <template #modal-body>
-      <TaskForm />
+      <BacklogDetails />
     </template>
   </Modal>
 </template>
@@ -94,20 +93,13 @@ export default {
           Pop.toast(error.message, 'error')
         }
       },
-      async addTask(backlogId) {
+      async getCurrentBacklogId(backlogId) {
         try {
           await backlogService.setBacklog(backlogId)
         } catch (error) {
           Pop.toast(error.message, 'error')
         }
       }
-      // async backlogDetails() {
-      //   try {
-
-      //   } catch (error) {
-      //     Pop.toast(error.message, 'error')
-      //   }
-      // }
     }
   }
 

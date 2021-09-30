@@ -4,5 +4,6 @@ export class Notes {
     this.backlogItemId = notesData.backlogItemId
     this.projectId = notesData.projectId
     this.creatorId = notesData.creatorId
+    this.creator = notesData.creator
   }
 }
