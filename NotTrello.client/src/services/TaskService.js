@@ -11,15 +11,19 @@ class TaskService {
     this.setWeight()
   }
 
-  setWeight(backlogId) {
+  setWeight() {
     let tasksWeight = 0
     let tasks = []
-    tasks = AppState.tasks.filter(t => t.backlogItemId === backlogId)
-    for (let i = 0; i < tasks.length; i++) {
-      tasksWeight += tasks[i].weight
+    for (let i = 0; i < AppState.backlogs.length; i++) {
+      tasks = AppState.tasks.filter(t => t.backlogItemId === AppState.backlogs[i].id)
+      for (let i = 0; i < tasks.length; i++) {
+        tasksWeight += tasks[i].weight
+      }
+      AppState.backlogs[i].weightTotal = tasksWeight
+      tasksWeight = 0
     }
     AppState.backlogs.weightTotal = tasksWeight
-    logger.log('Set Weight', AppState.backlogs.totalWeight)
+    logger.log('Set Weight', AppState.backlogs)
   }
 
   async getTasks(projectId) {
