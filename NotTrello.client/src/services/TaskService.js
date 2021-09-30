@@ -32,5 +32,12 @@ class TaskService {
     AppState.tasks = res.data.map(t => new Task(t))
     this.setWeight()
   }
+
+  async deleteTask(projectId, taskId) {
+    const res = await api.delete(`api/projects/${projectId}/tasks/${taskId}`)
+    logger.log('Deleted Task', res)
+    AppState.tasks = AppState.tasks.filter(t => t.id !== taskId)
+    this.setWeight()
+  }
 }
 export const taskService = new TaskService()

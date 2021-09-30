@@ -63,7 +63,7 @@
   </Modal>
   <Modal id="backlogDetails-modal">
     <template #modal-title>
-      {{ backlog.name }} Details
+      {{ backlog.name }} Details <i v-if="account.id == backlog.creatorId" class="mdi mdi-pencil selectable"></i>
     </template>
     <template #modal-body>
       <BacklogDetails />
@@ -85,6 +85,7 @@ export default {
   setup(props) {
     const route = useRoute()
     return {
+      account: computed(() => AppState.account)
       tasks: computed(() => AppState.tasks.filter(t => t.backlogItemId === props.backlog.id)),
       async deleteBacklogItem(backlogId) {
         try {

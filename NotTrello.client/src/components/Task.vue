@@ -11,19 +11,32 @@
       <i class="mdi mdi-weight f-20 ps-2"></i>
     </div>
     <div class="col-4 d-flex justify-content-end">
-      <i class="mdi mdi-delete f-20 selectable"></i>
+      <i class="mdi mdi-delete f-20 selectable" @click="deleteTask(task.id)"></i>
     </div>
   </div>
 </template>
 
 <script>
+import { useRoute } from 'vue-router'
 import { Task } from '../models/Task'
+import { taskService } from '../services/TaskService'
+import Pop from '../utils/Pop'
 export default {
   props: {
     task: { type: Task, required: true }
   },
   setup() {
-    return {}
+    const route = useRoute()
+    return {
+      async deleteTask(taskId) {
+        try {
+          await taskService.deleteTask(route.params.id, taskId)
+          Pop.toast('Deleted Task', 'success')
+        } catch (error) {
+          Pop.toast(error.message, 'error')
+        }
+      }
+    }
   }
 }
 </script>
