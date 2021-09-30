@@ -85,7 +85,7 @@ export default {
   setup(props) {
     const route = useRoute()
     return {
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
       tasks: computed(() => AppState.tasks.filter(t => t.backlogItemId === props.backlog.id)),
       async deleteBacklogItem(backlogId) {
         try {
