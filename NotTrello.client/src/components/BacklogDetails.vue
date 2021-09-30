@@ -34,21 +34,14 @@
           </ul>
         </div> -->
         <div class="row">
-          <label for="status">
-            Status
-          </label>
-          <button type="button" class="btn btn-outline-dark" v-bind="editable.status" value="pending">
-            Pending
-          </button>
-          <button type="button" class="btn btn-outline-dark" v-bind="editable.status" value="in-progress">
-            In-Progress
-          </button>
-          <button type="button" class="btn btn-outline-dark" v-bind="editable.status" value="review">
-            Review
-          </button>
-          <button type="button" class="btn btn-outline-dark" v-bind="editable.status" value="done">
-            Done
-          </button>
+          <input v-model="editable.status" type="radio" id="pending" name="status" value="pending">
+          <label for="pending">Pending</label>
+          <input v-model="editable.status" type="radio" id="in-progress" name="status" value="in-progress">
+          <label for="in-progress">In-Progress</label>
+          <input v-model="editable.status" type="radio" id="review" name="status" value="review">
+          <label for="review">Review</label>
+          <input v-model="editable.status" type="radio" id="done" name="status" value="done">
+          <label for="done">Done</label>
         </div>
         <div class="btn-group">
           <button type="submit" class="btn btn-success">
