@@ -5,7 +5,7 @@
         <div class="row justify-content-between mx-2">
           <div class="col-4 py-2 project">
             <p> {{ sprint.name }}</p>
-            <div v-if="account.id == project.creatorId"> <i class="mdi mdi-delete f-20 selectable" @click="deleteSprint(sprint.id)"></i></div>
+            <div v-if="account.id == sprint.creatorId"> <i class="mdi mdi-delete f-20 selectable" @click="deleteSprint(sprint.id)"></i></div>
              
           </div>
           <div class="col-2 align-self-end py-2">
