@@ -16,7 +16,7 @@
             <div class="mx-3">
               Sprints go here
             </div>
-            <i class="mdi mdi-weight me-3"></i>
+            {{ backlog.weightTotal }}<i class="mdi mdi-weight me-3"></i>
             <div>
               <button class="mx-3"
                       data-bs-toggle="modal"
@@ -82,10 +82,10 @@ export default {
   props: {
     backlog: { type: Backlog, required: true }
   },
-  setup() {
+  setup(props) {
     const route = useRoute()
     return {
-      tasks: computed(() => AppState.tasks),
+      tasks: computed(() => AppState.tasks.filter(t => t.backlogItemId === props.backlog.id)),
       async deleteBacklogItem(backlogId) {
         try {
           await backlogService.deleteBacklogItem(route.params.id, backlogId)

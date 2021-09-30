@@ -12,6 +12,10 @@ class BacklogService {
     logger.log('backlog', AppState.backlogs)
   }
 
+  setWeight(projectId) {
+
+  }
+
   async createBacklogItem(projectId, formData) {
     const res = await api.post(`api/projects/${projectId}/backlog`, formData)
     logger.log(res)

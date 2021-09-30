@@ -1,8 +1,10 @@
 <template>
-  <div class="row justify-content-between">
-    <div class="col-4">
+  <div class="row py-2 justify-content-between">
+    <div class="col-4 d-flex align-items-center">
       <input type="checkbox">
-      {{ task.name }}
+      <h5 class="ms-3">
+        {{ task.name }}
+      </h5>
     </div>
     <div class="col-4 d-flex align-items-center justify-content-center">
       {{ task.weight }}
