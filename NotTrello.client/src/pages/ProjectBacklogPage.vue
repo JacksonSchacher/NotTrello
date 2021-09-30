@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-8 m-auto">
         <div class="card shadow">
-          <div class="row justify-content-between mx-2">
+          <div class="backlog-card row justify-content-between rounded-top px-0 mx-0">
             <div class="col-4 py-2 project">
               <h4>{{ currentProject.name }} Backlog Items</h4>
               <p>{{ currentProject.description }}</p>
@@ -58,8 +58,8 @@ export default {
 }
 </script>
 
-<style>
-.card{
+<style scoped lang="scss">
+.backlog-card{
   background-color: rgba(0, 0, 0, 0.616);
   color: white;
   backdrop-filter: blur(4px);
@@ -69,7 +69,7 @@ export default {
 }
 .create-button{
    border: solid #BABEF8;
-  color: white;  
+  color: white;
 }
 .create-button:hover{
   border: solid #29ADF8;

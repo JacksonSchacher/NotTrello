@@ -1,12 +1,12 @@
 <template>
-   <div class="accordion accordion-flush" id="accordionFlushExample">
+  <div class="accordion accordion-flush" id="accordionFlushExample">
     <div class="accordion-item">
       <div class="row">
         <div class="accordion-header col-11" id="flush-headingOne">
           <button class="accordion-button collapsed"
                   type="button"
                   data-bs-toggle="collapse"
-                  data-bs-target="#flush-collapseOne"
+                  :data-bs-target="'#sprint-' + sprint.id"
                   aria-expanded="true"
                   aria-controls="flush-collapseOne"
           >
@@ -19,9 +19,8 @@
           <i class="mdi mdi-delete f-24 selectable" @click="deleteSprint(sprint.id)"></i>
         </div>
       </div>
-      <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+      <div :id="'sprint-'+sprint.id" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
         <div class="accordion-body">
-          
         </div>
       </div>
     </div>
@@ -38,8 +37,8 @@ export default {
   },
   setup() {
     const route = useRoute()
-    return{
-      async deleteSprint(sprintId){
+    return {
+      async deleteSprint(sprintId) {
         try {
           await sprintsService.deleteSprint(route.params.id, sprintId)
         } catch (error) {
