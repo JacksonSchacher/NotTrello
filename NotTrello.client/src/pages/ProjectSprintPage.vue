@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <Sprint :sprint="sprint" />
+    <Sprint v-if="sprint.id" :sprint="sprint" />
   </div>
 </template>
 

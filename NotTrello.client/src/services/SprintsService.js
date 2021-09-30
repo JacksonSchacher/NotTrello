@@ -24,13 +24,17 @@ class SprintsService {
 
   async editSprint(projectId, sprint) {
     const res = await api.put(`api/projects/${projectId}/sprints/${sprint.id}`, sprint)
-    AppState.sprints = new Sprint(res.data)
+    let foundIndex = AppState.sprints.findIndex(i => i.id === sprint.id)
+    const updatedSprint = new Sprint(res.data)
+    AppState.sprints.splice(foundIndex, 1, updatedSprint)
+    AppState.currentSprint = updatedSprint
     logger.log('edit sprints', res)
   }
 
   async deleteSprint(projectId, sprintId) {
     const res = await api.delete(`api/projects/${projectId}/sprints/${sprintId}`)
     AppState.sprints = AppState.sprints.filter(s => s.id !== sprintId)
+    
   }
 }
 export const sprintsService = new SprintsService()

@@ -1,5 +1,5 @@
 export class Sprint {
-  constructor(sprintData) {
+  constructor(sprintData ={}) {
     this.name = sprintData.name
     this.startDate = sprintData.startDate
     this.endDate = sprintData.endDate
@@ -8,4 +8,9 @@ export class Sprint {
     this.creatorId = sprintData.creatorId
     this.isOpen = sprintData.isOpen
   }
+  
+  // formatDate(rawDate){
+  //   let date = new Date(rawDate)
+  //   return date.getMonth() + "/" + date.getDate() + "/" + date.getYear()
+  // }
 }
