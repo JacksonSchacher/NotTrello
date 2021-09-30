@@ -3,12 +3,15 @@
     <div class="col-8 m-auto">
       <div class="card shadow">
         <div class="row justify-content-between mx-2 mt-3">
-          <div class="col-4 py-2 sprint-text text-center">
-            <h4> {{ sprint.name }}</h4>  
+          <div class="col-6 py-2 sprint-text">
+            <h4> {{ sprint.name }}</h4>
+            <p>Sprint Start Date: {{ new Date(sprint.startDate).toLocaleDateString() }}</p>
+            <p>Sprint End Date: {{ new Date(sprint.endDate).toLocaleDateString() }}</p>
+
           </div>
-           <div class="col-4 text-white" v-if="account.id == sprint.creatorId"> 
+           <div class="col-2 text-white" v-if="account.id == sprint.creatorId"> 
             <i class="mdi mdi-delete f-20 selectable" @click="deleteSprint(sprint.id)"></i>
-            <button class="btn create-button text-white pb-3" data-bs-toggle="modal" data-bs-target="#Sprint-modal">
+            <button class="btn create-button text-white pb-3" data-bs-toggle="modal" data-bs-target="#update-sprint">
             <i class="mdi mdi-pencil f-20 selectable"></i>
             </button>
             </div>
@@ -18,7 +21,7 @@
     </div>
   </div>
 
-  <Modal id="Sprint-modal">
+  <Modal id="update-sprint">
     <template #modal-title>
       Add Sprint
     </template>

@@ -8,4 +8,9 @@ export class Sprint {
     this.creatorId = sprintData.creatorId
     this.isOpen = sprintData.isOpen
   }
+  
+  // formatDate(rawDate){
+  //   let date = new Date(rawDate)
+  //   return date.getMonth() + "/" + date.getDate() + "/" + date.getYear()
+  // }
 }

@@ -13,28 +13,32 @@
   </div>
 
 <br />
-
-  <label for="startDate">Sprint Start Date: </label>
-  <br />
+  <div>
+  <label class="date-container" for="startDate">Sprint Start Date: {{new Date(editable.startDate).toDateString()}}
+ <i class="mdi mdi-calendar selectable"></i>
   <input 
     type="date" 
     name="startDate"
     id="startDate"
     v-model="editable.startDate"
-    required>
+    >
+     </label>
+  </div>
 
 <br />
 <br />
   
-  <label for="startDate">Sprint End Date: </label>
-  <br />
+  <div>
+  <label class="date-container" for="endDate">Sprint End Date: {{new Date(editable.endDate).toDateString()}} 
+     <i class="mdi mdi-calendar selectable"></i>
   <input 
     type="date" 
     name="endDate"
     id="endDate"
     v-model="editable.endDate"
-    required
     >
+    </label>
+  </div>
 
     <br />
     <br />
@@ -99,6 +103,28 @@ props: {
   }
   </script>
   
-  <style>
-  
+  <style scoped lang="scss">
+  .date-container{
+    position: relative;
+    display: block;
+  }
+
+ input[type="date"]{
+  border: none;
+  opacity: 0;
+  pointer-events: none;
+  &::-webkit-calendar-picker-indicator {
+    pointer-events: all;
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+  }
+ }  
   </style>
