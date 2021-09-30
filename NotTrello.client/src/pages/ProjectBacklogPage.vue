@@ -39,6 +39,7 @@ import { useRoute } from 'vue-router'
 import { backlogService } from '../services/BacklogService'
 import Pop from '../utils/Pop'
 import { projectsService } from '../services/ProjectsService'
+import { taskService } from '../services/TaskService'
 export default {
   setup() {
     const route = useRoute()
@@ -46,6 +47,8 @@ export default {
       try {
         await backlogService.getBacklogs(route.params.id)
         await projectsService.getProjectById(route.params.id)
+        await backlogService.getNotes(route.params.id)
+        await taskService.getTasks(route.params.id)
       } catch (error) {
         Pop.toast(error.message, 'error')
       }

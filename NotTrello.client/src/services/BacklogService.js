@@ -1,5 +1,6 @@
 import { AppState } from '../AppState'
 import { Backlog } from '../models/Backlog'
+import { Notes } from '../models/Notes'
 import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 
@@ -26,6 +27,24 @@ class BacklogService {
   async setBacklog(backlogId) {
     AppState.currentBacklog = AppState.backlogs.find(b => b.id === backlogId)
     logger.log('set Backlog', AppState.currentBacklog)
+  }
+
+  async addNote(projectId, noteData) {
+    const res = await api.post(`api/projects/${projectId}/notes`, noteData)
+    logger.log('Added Note', res)
+    AppState.notes = [...AppState.notes, new Notes(res.data)]
+  }
+
+  async getNotes(projectId) {
+    const res = await api.get(`api/projects/${projectId}/notes`)
+    logger.log('Got Notes', res)
+    AppState.notes = res.data.map(n => new Notes(n))
+  }
+
+  async deleteNote(projectId, noteId) {
+    const res = await api.delete(`api/projects/${projectId}/notes/${noteId}`)
+    logger.log('Deleted Note', res)
+    AppState.notes = AppState.notes.filter(n => n.id !== noteId)
   }
 }
 export const backlogService = new BacklogService()
