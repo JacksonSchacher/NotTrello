@@ -34,6 +34,7 @@ export default {
   setup() {
     const route = useRoute()
     return {
+      account: computed(() => AppState.account),
       currentProject: computed(() => AppState.currentProject),
       backlogs: computed(() => AppState.backlogs.filter(b => b.blackItemId === AppState.currentSprint.id)),
       async deleteSprint(sprintId) {
