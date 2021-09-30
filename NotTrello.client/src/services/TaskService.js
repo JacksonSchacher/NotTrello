@@ -13,12 +13,12 @@ class TaskService {
 
   setWeight(backlogId) {
     let tasksWeight = 0
-    for (let i = 0; i < AppState.tasks.length; i++) {
-      if (AppState.tasks[i].backlogItemId === backlogId) {
-        tasksWeight += AppState.tasks[i].weight
-      }
+    let tasks = []
+    tasks = AppState.tasks.filter(t => t.backlogItemId === backlogId)
+    for (let i = 0; i < tasks.length; i++) {
+      tasksWeight += tasks[i].weight
     }
-    AppState.backlogs.totalWeight = tasksWeight
+    AppState.backlogs.weightTotal = tasksWeight
     logger.log('Set Weight', AppState.backlogs.totalWeight)
   }
 
