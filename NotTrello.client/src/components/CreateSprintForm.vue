@@ -48,7 +48,10 @@
   v-model="editable.isOpen"
   >
   
-  <div class="button-group my-3">
+  <div class="button-group my-3" v-if="editable.id">
+    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Update</button>
+  </div>
+    <div class="button-group my-3" v-else>
     <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Create</button>
   </div>
 </form>
@@ -62,12 +65,17 @@ import { sprintsService } from '../services/SprintsService'
 import { AppState } from '../AppState'
 import { useRoute } from 'vue-router'
 import { logger } from '../utils/Logger'
+import { Sprint } from '../models/Sprint'
   export default {
-    setup() {
+props: {
+  sprint: {type: Sprint, default: ()=> new Sprint() }
+},
+    setup(props) {
       const route = useRoute()
       const editable = ref({})
       watchEffect(() => {
-        editable.value = {}
+        editable.value = { ...props.sprint }
+        logger.log('updating sprint info', props.sprint, editable.value)
       })
       return {
         route,
@@ -75,18 +83,19 @@ import { logger } from '../utils/Logger'
         project: computed(() => AppState.projects),
         async submitSprintForm(){
           try {
-            // editable.value.id
-            // ? await sprintsService.editSprint(editable.value)
+            if (editable.value.id) {
+              await sprintsService.editSprint(route.params.id, editable.value)
+            } else{
             await sprintsService.createSprint(route.params.id, editable.value)
             editable.value = {}
+            }
           } catch (error) {
             Pop.toast(error.message, 'error')
-            logger.log('create sprint', error.message)
           }
+          
         }
       }
     }
-  
   }
   </script>
   
