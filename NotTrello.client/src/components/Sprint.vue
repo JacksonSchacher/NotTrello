@@ -5,6 +5,8 @@
         <div class="row justify-content-between mx-2">
           <div class="col-4 py-2 project">
             <p> {{ sprint.name }}</p>
+            <div v-if="account.id == project.creatorId"> <i class="mdi mdi-delete f-20 selectable" @click="deleteSprint(sprint.id)"></i></div>
+             
           </div>
           <div class="col-2 align-self-end py-2">
           </div>
@@ -23,6 +25,8 @@ import { useRoute } from 'vue-router'
 import { AppState } from '../AppState'
 import { computed } from '@vue/runtime-core'
 import { Sprint } from '../models/Sprint'
+import { logger } from '../utils/Logger'
+import { router } from '../router'
 export default {
   props: {
     sprint: { type: Sprint, required: true }
@@ -34,7 +38,11 @@ export default {
       backlogs: computed(() => AppState.backlogs.filter(b => b.blackItemId === AppState.currentSprint.id)),
       async deleteSprint(sprintId) {
         try {
+          const yes = await Pop.confirm('Are you sure you want to delete?')
+          if (!yes) {return}
           await sprintsService.deleteSprint(route.params.id, sprintId)
+          router.push({ name: 'Project.Backlog', params: { id: projectId } })
+          
         } catch (error) {
           Pop.toast(error.message, 'error')
         }
