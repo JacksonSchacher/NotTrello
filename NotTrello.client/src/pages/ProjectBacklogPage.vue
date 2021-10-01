@@ -1,16 +1,16 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-8 m-auto">
-        <div class="card shadow">
-          <div class="backlog-card row justify-content-between rounded-top px-0 mx-0">
-            <div class="col-md-4 py-2 project">
+      <div class="col-md-10 m-auto">
+        <div class="card bg-transparent shadow">
+          <div class="row backlog-bg  justify-content-between rounded-top px-0 mx-0">
+            <div class="col-md-10 text-white py-2 project">
               <h4>{{ currentProject.name }} Backlog Items</h4>
               <p>{{ currentProject.description }}</p>
             </div>
             <div class="col-md-2 align-self-end py-2">
-              <button class="btn create-button" data-bs-toggle="modal" data-bs-target="#BacklogItem-modal">
-                Create Backlog Item
+              <button class="btn create-button mb-3" data-bs-toggle="modal" data-bs-target="#BacklogItem-modal">
+                + Backlog Item
               </button>
             </div>
           </div>
@@ -62,10 +62,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.backlog-card{
+.backlog-bg{
   background-color: rgba(0, 0, 0, 0.616);
-  color: white;
-  backdrop-filter: blur(4px);
 }
 .project{
   text-shadow: 2px 1px 2px #000000;

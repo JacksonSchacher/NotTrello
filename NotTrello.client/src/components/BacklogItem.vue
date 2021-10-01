@@ -1,8 +1,6 @@
 <template>
-  <div class="accordian accordion-flush" id="accordionFlushExample">
-    <div class="accordion-item">
-      <div class="row">
-        <div class="accordion-header col-11" id="flush-headingOne">
+  <div class="container-fluid p-0 accordian accordion-flush" id="accordionFlushExample">
+        <div class="row accordion-header m-0 p-0 justify-content-around" id="flush-headingOne">
           <button class="accordion-button collapsed"
                   type="button"
                   data-bs-toggle="collapse"
@@ -11,57 +9,56 @@
                   aria-controls="flush-collapseOne"
           >
 
-            <div>
-            <i class="mdi mdi-folder f-24 mb-2"></i>
-            <h4>{{ backlog.name }}</h4>
+            <div class="col-md-4">
+            <i class="mdi mdi-folder f-20">{{ backlog.name }}</i>
             </div>
+      
 
-            <div class="mx-3">
-              Sprints go here
-            </div>
-
-            <div class="hidden-text">{{ backlog.weightTotal }}<i class="mdi mdi-weight me-3"></i></div>
-
-            <div>
-              <button class="mx-3"
+            <div class="col-md-2">
+            <span class="px-2"> {{ backlog.weightTotal }}<i class="mdi mdi-weight f-20 px-2"></i></span>
+             </div>
+            
+            <div class="col-md-4">
+              <button class="btn custom-button mx-2"
                       data-bs-toggle="modal"
                       data-bs-target="#backlogDetails-modal"
                       @click="getCurrentBacklogId(backlog.id)"
               >
-                Details
+                <i class="mdi mdi-eye pe-2"></i>Details
               </button>
-            </div>
-
-            <div>
+            
               <button data-bs-toggle="modal"
+                      class="btn custom-button"
                       data-bs-target="#Task-modal"
                       @click="getCurrentBacklogId(backlog.id)"
               >
-                Add Task
+                + Add Task
               </button>
-            </div>
-
-            <div>
-            <h4 class="ms-5 hidden-text">
+               </div>
+          
+          <div class="col-md-4">
+            <span>
               Tasks Completed
-            </h4>
-            </div>
-          </button>
-        </div>
-        <div class="d-flex col-1 align-items-center text-dark">
-          <i class="mdi mdi-delete f-24 selectable" @click="deleteBacklogItem(backlog.id)"></i>
-        </div>
-      </div>
+             <!-- TODO add counter for tasks completed -->
+            </span>
+          </div>
 
-      <div :id="'backlog-'+backlog.id" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+          </button>
+
+        </div>
+
+        </div>
+      
+
+      <div :id="'backlog-'+backlog.id" class="task accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
         <div class="accordion-body">
           <div v-for="t in tasks" :key="t.id">
             <Task :task="t" />
           </div>
         </div>
       </div>
-    </div>
-  </div>
+
+
   <Modal id="Task-modal">
     <template #modal-title>
       Create Task
@@ -70,14 +67,19 @@
       <TaskForm />
     </template>
   </Modal>
+
   <Modal id="backlogDetails-modal">
     <template #modal-title>
-      {{ backlog.name }} Details <i v-if="account.id == backlog.creatorId" class="mdi mdi-pencil selectable" @click="editDetails(backlog.edit)"></i>
+      <div v-if="account.id == backlog.creatorId" >
+      {{ backlog.name }} Details <i class="mdi mdi-pencil selectable" @click="editDetails(backlog.edit)"></i>
+      <i class="mdi mdi-delete selectable" @click="deleteBacklogItem(backlog.id)"></i>
+      </div>
     </template>
     <template #modal-body>
       <BacklogDetails />
     </template>
   </Modal>
+
 </template>
 
 <script>
@@ -97,6 +99,7 @@ export default {
     return {
       account: computed(() => AppState.account),
       tasks: computed(() => AppState.tasks.filter(t => t.backlogItemId === props.backlog.id)),
+      sprint: computed(() => AppState.sprints.filter(s => s.sprintId === props.backlog.sprintId)),
       async deleteBacklogItem(backlogId) {
         try {
           await backlogService.deleteBacklogItem(route.params.id, backlogId)
@@ -130,5 +133,19 @@ export default {
      .hidden-text {
        display: none;
      }
+}
+
+.custom-button{
+   border: solid #BABEF8;
+}
+.custom-button:hover{
+  border: solid #29ADF8;
+  background-color: rgba(0, 0, 0, 0.192);
+  color: white;
+}
+.task{
+  background-color: rgba(0, 0, 0, 0.616);
+  color: white;
+  backdrop-filter: blur(4px);
 }
 </style>

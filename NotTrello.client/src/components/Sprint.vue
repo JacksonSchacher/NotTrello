@@ -5,21 +5,20 @@
         <div class="row justify-content-between mx-2 mt-3">
           <div class="col-6 py-2 sprint-text">
             <h4> {{ sprint.name }}</h4>
-            <p>Sprint Start Date: {{ new Date(sprint.startDate).toLocaleDateString() }}</p>
-            <p>Sprint End Date: {{ new Date(sprint.endDate).toLocaleDateString() }}</p>
-
+            <p><small>{{ new Date(sprint.endDate).toLocaleDateString() }} - {{ new Date(sprint.startDate).toLocaleDateString() }}</small></p>
           </div>
+
            <div class="col-2 text-white" v-if="account.id == sprint.creatorId"> 
             <i class="mdi mdi-delete f-20 selectable" @click="deleteSprint(sprint.id)"></i>
             <button class="btn create-button text-white pb-3" data-bs-toggle="modal" data-bs-target="#update-sprint">
             <i class="mdi mdi-pencil f-20 selectable"></i>
             </button>
+          </div>
             </div>
         </div>
         <BacklogItem v-for="b in backlogs" :key="b.id" :backlog="b" />
       </div>
     </div>
-  </div>
 
   <Modal id="update-sprint">
     <template #modal-title>

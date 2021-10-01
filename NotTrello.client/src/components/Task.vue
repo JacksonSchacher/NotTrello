@@ -1,5 +1,5 @@
 <template>
-  <div class="row py-2 justify-content-between">
+  <div class="row py-2 text-white justify-content-between">
     <div class="col-4 d-flex align-items-center">
       <input @change="checked()" v-model="editable.isComplete" type="checkbox">
       <h5 class="ms-3">
@@ -55,6 +55,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="scss">
 
 </style>
