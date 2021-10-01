@@ -23,6 +23,7 @@ import { Task } from '../models/Task'
 import { taskService } from '../services/TaskService'
 import Pop from '../utils/Pop'
 import { watchEffect } from '@vue/runtime-core'
+import { logger } from '../utils/Logger'
 export default {
   props: {
     task: { type: Task, required: true }
@@ -43,11 +44,12 @@ export default {
           Pop.toast(error.message, 'error')
         }
       },
-      async checked(taskId, isComplete) {
+      async checked() {
         try {
           await taskService.checkTask(route.params.id, props.task.id, editable.value)
         } catch (error) {
           Pop.toast(error.message, 'error')
+          logger.log('checked', error.message)
         }
       }
     }

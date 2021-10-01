@@ -23,12 +23,10 @@ class TaskService {
       tasksWeight = 0
     }
     AppState.backlogs.weightTotal = tasksWeight
-    logger.log('Set Weight', AppState.backlogs)
   }
 
   async getTasks(projectId) {
     const res = await api.get(`api/projects/${projectId}/tasks`)
-    logger.log('Got Tasks', res)
     AppState.tasks = res.data.map(t => new Task(t))
     this.setWeight()
   }
@@ -41,7 +39,6 @@ class TaskService {
 
   async deleteTask(projectId, taskId) {
     const res = await api.delete(`api/projects/${projectId}/tasks/${taskId}`)
-    logger.log('Deleted Task', res)
     AppState.tasks = AppState.tasks.filter(t => t.id !== taskId)
     this.setWeight()
   }
