@@ -40,12 +40,14 @@ import { backlogService } from '../services/BacklogService'
 import Pop from '../utils/Pop'
 import { projectsService } from '../services/ProjectsService'
 import { taskService } from '../services/TaskService'
+import { sprintsService } from '../services/SprintsService'
 export default {
   setup() {
     const route = useRoute()
     onMounted(async() => {
       try {
         await backlogService.getBacklogs(route.params.id)
+        await sprintsService.getSprints(route.params.id)
         await projectsService.getProjectById(route.params.id)
         await backlogService.getNotes(route.params.id)
         await taskService.getTasks(route.params.id)

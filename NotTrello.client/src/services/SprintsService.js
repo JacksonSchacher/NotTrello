@@ -6,6 +6,7 @@ import { api } from './AxiosService'
 class SprintsService {
   async getSprints(projectId) {
     const res = await api.get(`api/projects/${projectId}/sprints`)
+    logger.log('Got Sprints', res)
     AppState.sprints = res.data.map(s => new Sprint(s))
   }
 
@@ -20,7 +21,7 @@ class SprintsService {
 
   async editSprint(projectId, sprint) {
     const res = await api.put(`api/projects/${projectId}/sprints/${sprint.id}`, sprint)
-    let foundIndex = AppState.sprints.findIndex(i => i.id === sprint.id)
+    const foundIndex = AppState.sprints.findIndex(i => i.id === sprint.id)
     const updatedSprint = new Sprint(res.data)
     AppState.sprints.splice(foundIndex, 1, updatedSprint)
     AppState.currentSprint = updatedSprint
@@ -29,7 +30,6 @@ class SprintsService {
   async deleteSprint(projectId, sprintId) {
     const res = await api.delete(`api/projects/${projectId}/sprints/${sprintId}`)
     AppState.sprints = AppState.sprints.filter(s => s.id !== sprintId)
-    
   }
 }
 export const sprintsService = new SprintsService()
