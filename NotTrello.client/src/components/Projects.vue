@@ -2,13 +2,13 @@
   <div class="row">
     <div class="card-body selectable" @click="goToProjectPage(project.id)">
       <div class="row justify-content-between mx-5">
-        <div class="col-2">
+        <div class="col-md-4">
           <p>{{ project.name }}</p>
         </div>
-        <div class="col-2" v-if="project.creator">
+        <div class="col-md-4" v-if="project.creator">
           <img :src="project.creator.picture" class="rounded-circle" height="45" alt="">
         </div>
-        <div class="col-2">
+        <div class="col-md-4">
           <div class="position-absolute" style="right: 1rem;" v-if="account.id == project.creatorId">
             <i class="mdi mdi-delete f-20 selectable" @click="deleteProject(project.id)"></i>
           </div>
@@ -63,4 +63,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 </style>

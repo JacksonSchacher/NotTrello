@@ -10,13 +10,18 @@
                   aria-expanded="true"
                   aria-controls="flush-collapseOne"
           >
-            <i class="mdi mdi-folder f-24 mb-2"></i>
 
+            <div>
+            <i class="mdi mdi-folder f-24 mb-2"></i>
             <h4>{{ backlog.name }}</h4>
+            </div>
+
             <div class="mx-3">
               Sprints go here
             </div>
-            {{ backlog.weightTotal }}<i class="mdi mdi-weight me-3"></i>
+
+            <div class="hidden-text">{{ backlog.weightTotal }}<i class="mdi mdi-weight me-3"></i></div>
+
             <div>
               <button class="mx-3"
                       data-bs-toggle="modal"
@@ -26,6 +31,7 @@
                 Details
               </button>
             </div>
+
             <div>
               <button data-bs-toggle="modal"
                       data-bs-target="#Task-modal"
@@ -34,9 +40,12 @@
                 Add Task
               </button>
             </div>
-            <h4 class="ms-5">
+
+            <div>
+            <h4 class="ms-5 hidden-text">
               Tasks Completed
             </h4>
+            </div>
           </button>
         </div>
         <div class="d-flex col-1 align-items-center text-dark">
@@ -117,4 +126,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@media only screen and (max-width: 768px) {
+     .hidden-text {
+       display: none;
+     }
+}
 </style>

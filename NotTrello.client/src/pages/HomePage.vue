@@ -1,27 +1,27 @@
 <template>
   <div class="container-fluid">
     <div class="row py-2 mt-2">
-    <div class="col-10 offset-1">
+    <div class="col-md-10 offset-1">
   <div class="card shadow px-4 m-5">
   <div class="row justify-content-between my-4 mx-5">
-    <div class="col-3">
+    <div class="col-md-4">
       <h4 class="mt-2 project"> Projects </h4>
     </div>
-    <div class="col-2">
+    <div class="col-md-4">
      <button class="btn projectButton" data-bs-toggle="modal" data-bs-target="#createProject-modal">
       Create Project
       </button>
     </div>
     </div>
     <div class="card-header">
-      <div class="row justify-content-between mx-5">
-    <div class="col-2">
+      <div class="row justify-content-between mx-5 hidden-text">
+    <div class="col-md-4">
       <h6>Name:</h6>
       </div>
-      <div class="col-2">
+      <div class="col-md-4">
         <h6>Members:</h6>
       </div>
-      <div class="col-2">
+      <div class="col-md-4">
       <h6> Started On:</h6>
       </div>
       </div>
@@ -95,5 +95,10 @@ color: white;
 .project{
   text-shadow: 2px 2px 4px #000000;
   font-size: 45px;
+}
+@media only screen and (max-width: 768px) {
+     .hidden-text {
+       display: none;
+     }
 }
 </style>

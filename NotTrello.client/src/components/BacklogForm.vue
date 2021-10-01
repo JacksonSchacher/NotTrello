@@ -66,18 +66,22 @@
     <!-- Colors -->
     <div class="form-group mt-3">
       <div class="" role="group" aria-label="Toggle Status Buttons">
+
+        
         <input type="radio"
                class="btn-check"
                name="status"
                id="dark"
+               value="dark"
                v-model="editable.color"
         >
         <label class="btn btn-color" for="dark">Dark</label>
+    
 
         <input type="radio"
                class="btn-check"
                name="color"
-               id="status"
+               id="red"
                value="red"
                v-model="editable.color"
         >
@@ -86,51 +90,56 @@
         <input type="radio"
                class="btn-check"
                name="color"
-               id="red"
+               id="orange"
+               value="orange"
                v-model="editable.color"
         >
         <label class="btn btn-color" for="orange">Orange</label>
-        <input type="radio"
-               class="btn-check"
-               name="color"
-               id="orange"
-               v-model="editable.color"
-        >
-        <label class="btn btn-color" for="yellow">Yellow</label>
+
         <input type="radio"
                class="btn-check"
                name="color"
                id="yellow"
+               value="yellow"
                v-model="editable.color"
         >
-        <label class="btn btn-color" for="green">Green</label>
+        <label class="btn btn-color" for="yellow">Yellow</label>
+
         <input type="radio"
                class="btn-check"
                name="color"
                id="green"
+               value="green"
                v-model="editable.color"
         >
-        <label class="btn btn-color" for="blue">Blue</label>
+        <label class="btn btn-color" for="green">Green</label>
+
         <input type="radio"
                class="btn-check"
                name="color"
                id="blue"
+               value="blue"
                v-model="editable.color"
         >
-        <label class="btn btn-color" for="purple">Purple</label>
+       <label class="btn btn-color" for="blue">Blue</label>
+
         <input type="radio"
                class="btn-check"
                name="color"
                id="purple"
+               value="purple"
                v-model="editable.color"
         >
-        <label class="btn btn-color" for="light">Light</label>
+         <label class="btn btn-color" for="purple">Purple</label>
+        
         <input type="radio"
                class="btn-check"
                name="color"
                id="light"
+               value="light"
                v-model="editable.color"
         >
+        <label class="btn btn-color" for="light">Light</label>
       </div>
     </div>
     <button type="submit" class="btn btn-success">
@@ -164,6 +173,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+input[type="radio"]+ label{
+border: 5px solid transparent;
+transition: all .15s linear;
+}
+input[type="radio"]:checked + label{
+
+ border: 5px solid rgba(1, 1, 2, 0.329);
+}
 .btn-color {
   width: 40%;
   margin:.25rem;
